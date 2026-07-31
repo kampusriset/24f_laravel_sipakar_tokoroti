@@ -2,12 +2,17 @@
 
 namespace App\Filament\Resources\Produks\Tables;
 
+use App\Models\KategoriProduk;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
 class ProduksTable
@@ -33,11 +38,15 @@ class ProduksTable
 
                 TextColumn::make('kategori.nama_kategori')
                     ->label('Kategori')
+                    ->badge()
+                    ->color('primary')
                     ->searchable()
                     ->sortable(),
 
                 TextColumn::make('harga_jual')
                     ->label('Harga')
+                    ->badge()
+                    ->color('success')
                     ->formatStateUsing(fn ($state) => 'Rp ' . number_format($state, 0, ',', '.'))
                     ->sortable(),
 
@@ -51,13 +60,49 @@ class ProduksTable
                     ->sortable(),
 
             ])
+
             ->filters([
 
+                SelectFilter::make('id_kategori')
+                    ->label('Kategori')
+                    ->relationship('kategori', 'nama_kategori'),
+
+                Filter::make('harga')
+                    ->label('Harga')
+                    ->form([
+                        Select::make('range')
+                            ->label('Rentang Harga')
+                            ->options([
+                                'murah' => '≤ Rp20.000',
+                                'sedang' => 'Rp20.001 - Rp40.000',
+                                'mahal' => '> Rp40.000',
+                            ]),
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+
+                        return match ($data['range'] ?? null) {
+
+                            'murah' =>
+                                $query->where('harga_jual', '<=', 20000),
+
+                            'sedang' =>
+                                $query->whereBetween('harga_jual', [20001, 40000]),
+
+                            'mahal' =>
+                                $query->where('harga_jual', '>', 40000),
+
+                            default => $query,
+
+                        };
+                    }),
+
             ])
+
             ->recordActions([
                 EditAction::make()
                     ->visible(fn () => Auth::user()?->role === 'admin'),
             ])
+
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make()

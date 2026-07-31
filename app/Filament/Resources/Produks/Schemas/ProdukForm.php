@@ -32,8 +32,48 @@ class ProdukForm
                     ->numeric()
                     ->prefix('Rp')
                     ->required()
-                    ->minValue(1)
+                    ->minValue(0)
                     ->step(100),
+
+                Select::make('tingkat_manis')
+                    ->label('Tingkat Manis')
+                    ->options([
+                        1 => '1 - Sangat Rendah',
+                        2 => '2',
+                        3 => '3',
+                        4 => '4',
+                        5 => '5 - Sedang',
+                        6 => '6',
+                        7 => '7',
+                        8 => '8',
+                        9 => '9',
+                        10 => '10 - Sangat Manis',
+                    ])
+                    ->required(),
+
+                Select::make('alergi')
+                    ->label('Alergi')
+                    ->options([
+                        'Tidak Ada' => 'Tidak Ada',
+                        'Gluten' => 'Gluten',
+                        'Susu' => 'Susu',
+                        'Kacang' => 'Kacang',
+                        'Telur' => 'Telur',
+                    ])
+                    ->searchable()
+                    ->required(),
+
+                Select::make('keperluan')
+                    ->label('Keperluan')
+                    ->options([
+                        'Sarapan' => 'Sarapan',
+                        'Cemilan' => 'Cemilan',
+                        'Oleh-oleh' => 'Oleh-oleh',
+                        'Hadiah' => 'Hadiah',
+                        'Acara' => 'Acara',
+                    ])
+                    ->searchable()
+                    ->required(),
 
                 FileUpload::make('gambar')
                     ->label('Foto Produk')
