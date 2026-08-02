@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Actions;
+namespace App\Filament\Resources\Actions;
 
 use App\Models\Pembayaran;
 use Filament\Actions\Action;

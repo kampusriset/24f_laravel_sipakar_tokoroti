@@ -2,7 +2,7 @@
 
 namespace App\Filament\Resources\Transaksis\Tables;
 
-use App\Filament\Actions\CheckoutAction;
+use App\Filament\Resources\Actions\CheckoutAction;
 use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
