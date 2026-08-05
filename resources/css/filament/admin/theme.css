@@ -1,4 +1,183 @@
-@import '../../../../vendor/filament/filament/resources/css/theme.css';
+/* resources/css/filament/admin/theme.css */
 
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
+
+/* Custom CSS Variables untuk penggunaan di Blade */
+:root {
+    --brand-brown: #6B4226;
+    --brand-brown-light: #A9754F;
+    --brand-cream: #FFFBF2;
+    --brand-gold: #F59E0B;
+    
+    /* Override Filament variables jika diperlukan */
+    --fi-color-primary-50: #FEF3C7;
+    --fi-color-primary-100: #FDE68A;
+    --fi-color-primary-200: #FCD34D;
+    --fi-color-primary-300: #FBBF24;
+    --fi-color-primary-400: #F59E0B;
+    --fi-color-primary-500: #D97706;
+    --fi-color-primary-600: #B45309;
+    --fi-color-primary-700: #92400E;
+    --fi-color-primary-800: #78350F;
+    --fi-color-primary-900: #451A03;
+    --fi-color-primary-950: #2D1A0E;
+}
+
+/* Custom styling untuk sidebar dan topbar */
+.fi-sidebar {
+    background-color: var(--brand-gold) !important;
+}
+
+.fi-topbar {
+    background-color: var(--brand-gold) !important;
+    border-bottom: 2px solid var(--brand-brown) !important;
+}
+
+.fi-sidebar-item-active {
+    background-color: var(--brand-gold) !important;
+    color: var(--brand-brown) !important;
+}
+
+.fi-sidebar-item {
+    color: var(--brand-black) !important;
+}
+
+.fi-sidebar-item:hover {
+    background-color: rgb(252, 244, 244) !important;
+}
+
+/* Styling untuk card dan konten */
+.fi-card {
+    background-color: var(--brand-cream) !important;
+    border: 1px solid var(--brand-brown-light) !important;
+}
+
+/* Custom button styling */
+.fi-btn-primary {
+    background-color: var(--brand-gold) !important;
+    color: var(--brand-brown) !important;
+}
+
+.fi-btn-primary:hover {
+    background-color: #D97706 !important;
+}
+
+/* Custom styling untuk dashboard */
+.dashboard-welcome-card {
+    background: linear-gradient(135deg, #FFFBF2 0%, #F5EDE0 100%);
+    border: 1px solid #A9754F;
+    border-radius: 12px;
+    padding: 24px;
+}
+
+.dashboard-welcome-card .welcome-title {
+    color: #6B4226;
+    font-weight: 700;
+}
+
+.dashboard-welcome-card .welcome-date {
+    color: #A9754F;
+    font-size: 0.875rem;
+}
+
+.dashboard-welcome-card .signout-btn {
+    background-color: #6B4226;
+    color: #FFFBF2;
+    padding: 8px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.dashboard-welcome-card .signout-btn:hover {
+    background-color: #8C5A35;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(2, 2, 2, 0.2);
+}
+
+/* Grid widget styling */
+.dashboard-widgets-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+.dashboard-widgets-grid .widget-item {
+    background: #0c0c0c;
+    border: 1px solid #A9754F;
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.dashboard-widgets-grid .widget-item:hover {
+    box-shadow: 0 8px 16px rgba(8, 8, 8, 0.1);
+    transform: translateY(-2px);
+}
+
+/* resources/css/filament/admin/theme.css */
+
+/* Styling card widget dengan tema toko roti */
+.fi-wi-chart {
+    background: linear-gradient(135deg, #FFFBF2 0%, #F5EDE0 100%) !important;
+    border: 1px solid #A9754F !important;
+    border-radius: 16px !important;
+    box-shadow: 0 4px 12px rgba(107, 66, 38, 0.08) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    padding: 8px !important;
+}
+
+.fi-wi-chart:hover {
+    box-shadow: 0 8px 24px rgba(107, 66, 38, 0.15) !important;
+    transform: translateY(-4px) !important;
+}
+
+.fi-wi-chart .fi-section-header {
+    border-bottom: 3px solid #F59E0B !important;
+    padding: 16px 20px 12px 20px !important;
+    margin-bottom: 8px !important;
+}
+
+.fi-wi-chart .fi-section-header h3 {
+    color: #6B4226 !important;
+    font-weight: 700 !important;
+    font-size: 1.125rem !important;
+    letter-spacing: -0.025em !important;
+}
+
+.fi-wi-chart .fi-section-header .fi-section-header-description {
+    color: #A9754F !important;
+    font-size: 0.875rem !important;
+    margin-top: 4px !important;
+}
+
+.fi-wi-chart .fi-section-content {
+    padding: 12px 16px 20px 16px !important;
+}
+
+
+/* Card untuk widget stats (jika ada) */
+.fi-wi-stats-overview .fi-stat {
+    background: #FFFBF2 !important;
+    border: 1px solid #A9754F !important;
+    border-radius: 12px !important;
+    padding: 16px !important;
+    transition: all 0.3s ease !important;
+}
+
+.fi-wi-stats-overview .fi-stat:hover {
+    border-color: #F59E0B !important;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2) !important;
+    transform: translateY(-2px) !important;
+}
+
+.fi-wi-stats-overview .fi-stat .fi-stat-label {
+    color: #6B4226 !important;
+    font-weight: 600 !important;
+}
+
+.fi-wi-stats-overview .fi-stat .fi-stat-value {
+    color: #6B4226 !important;
+    font-weight: 800 !important;
+}

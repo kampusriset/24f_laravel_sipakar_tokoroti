@@ -19,7 +19,13 @@ class BahanBakuResource extends Resource
 {
     protected static ?string $model = BahanBaku::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCube;
+
+    protected static ?string $navigationLabel = 'Bahan Baku';
+
+    protected static ?string $modelLabel = 'Bahan Baku';
+
+    protected static ?string $pluralModelLabel = 'Bahan Baku';
 
     protected static ?string $recordTitleAttribute = 'nama_bahan';
 

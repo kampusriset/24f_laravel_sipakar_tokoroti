@@ -19,7 +19,13 @@ class KategoriProdukResource extends Resource
 {
     protected static ?string $model = KategoriProduk::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedTag;
+
+    protected static ?string $navigationLabel = 'Kategori Produk';
+
+    protected static ?string $modelLabel = 'Kategori Produk';
+
+    protected static ?string $pluralModelLabel = 'Kategori Produk';
 
     protected static ?string $recordTitleAttribute = 'nama_kategori';
 
