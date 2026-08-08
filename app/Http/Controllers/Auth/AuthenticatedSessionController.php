@@ -28,8 +28,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        // Redirect ke Dashboard Filament
-        return redirect('/admin');
+        return redirect()->intended(route('dashboard', absolute: false));
     }
 
     /**

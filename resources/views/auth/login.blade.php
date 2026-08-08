@@ -1,6 +1,14 @@
 <x-guest-layout>
+    <div class="auth-brand">
+        <div class="auth-mark">F</div>
+        <div>
+            <h1 class="auth-title">Flourie <span>Bakery</span></h1>
+            <p class="auth-subtitle">Selamat datang kembali di dashboard toko.</p>
+        </div>
+    </div>
+
     @if(session('error'))
-        <div style="background-color:#fef2f2; color:#991b1b; padding:12px; border-radius:8px; margin-bottom:16px; border:1px solid #fecaca;">
+        <div class="auth-alert">
             {{ session('error') }}
         </div>
     @endif
@@ -12,49 +20,44 @@
         @csrf
 
         <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+        <div class="auth-field">
+            <x-input-label for="email" value="Email / No Hp" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" placeholder="Masukkan Email atau Nomor Hp" required autofocus autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
+        <div class="auth-field">
+            <x-input-label for="password" value="Kata Sandi" />
 
             <x-text-input id="password" class="block mt-1 w-full"
                             type="password"
                             name="password"
+                            placeholder="Masukkan Kata Sandi"
                             required autocomplete="current-password" />
 
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
+        <div class="auth-link-row">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
+                <a class="auth-link" href="{{ route('password.request') }}">
+                    Lupa Kata Sandi
                 </a>
             @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
         </div>
+
+        <button type="submit" class="auth-button">Masuk</button>
     </form>
 
-    <div class="mt-6">
+    <p class="auth-note">Hubungi administrator jika Anda belum memiliki akun.</p>
+
+    <div class="auth-divider">atau</div>
+
+    <div>
         <form action="/auth/google" method="GET">
-            <button type="submit"
-                    style="display:block; width:100%; text-align:center; padding:10px; background-color:#ef4444; color:white; border-radius:8px; font-weight:bold; border:none; cursor:pointer; font-size:16px;">
+            <button type="submit" class="google-button">
+                <span class="google-icon">G</span>
                 Login dengan Google
             </button>
         </form>
