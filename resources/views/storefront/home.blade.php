@@ -1,0 +1,4 @@
+@extends('layouts.storefront')
+@section('content')
+<main><section class="page-head"><div class="container"><span class="eyebrow">Dibuat hangat setiap pagi</span><h1>Kebahagiaan kecil, dari oven kami.</h1><p>Roti lembut, pastry renyah, dan kue istimewa untuk menemani momen terbaikmu.</p><p style="margin-top:25px"><a class="btn btn-primary" href="{{ route('storefront.products') }}">Lihat Menu</a></p></div></section><section class="section"><div class="container two-col"><div><span class="eyebrow">Floura Bakery</span><h2>Rasa yang dibuat dengan perhatian.</h2><p class="copy" style="margin:0">Kami memilih bahan berkualitas dan memanggang setiap produk setiap hari, sehingga setiap gigitan terasa hangat dan istimewa.</p><p style="margin-top:25px"><a class="btn btn-light" href="{{ route('storefront.about') }}">Cerita Kami</a></p></div><div class="illustration">🥖</div></div></section></main>
+@endsection

@@ -526,6 +526,14 @@
                 <span>Stok Produk</span>
             </a>
         </nav>
+
+        <div class="sidebar-label">Artificial Intelligence</div>
+        <nav class="sidebar-nav">
+            <a href="{{ route('kasir.ai-rekomendasi') }}" class="sidebar-link {{ request()->routeIs('kasir.ai-rekomendasi') ? 'active' : '' }}">
+                <span class="sidebar-icon">✦</span>
+                <span>AI Rekomendasi</span>
+            </a>
+        </nav>
     </div>
 
     <div class="sidebar-card">
@@ -558,6 +566,7 @@
 
     <div class="mobile-menu">
         <a href="{{ route('kasir.transaksi.create') }}">Transaksi</a>
+        <a href="{{ route('kasir.ai-rekomendasi') }}">AI</a>
         <form method="POST" action="{{ route('logout') }}">
             @csrf
             <button type="submit">Keluar</button>
