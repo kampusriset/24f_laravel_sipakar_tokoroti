@@ -21,20 +21,13 @@ class DetailTransaksisTable
                 TextColumn::make('produk.nama_produk')
                     ->label('Produk'),
 
-                TextColumn::make('jumlah')
-                    ->badge()
-                    ->color('gray'),
+                TextColumn::make('jumlah'),
 
                 TextColumn::make('harga_satuan')
-                    ->money('IDR')
-                    ->badge()
-                    ->color('warning'),
+                    ->money('IDR'),
 
                 TextColumn::make('subtotal')
-                    ->money('IDR')
-                    ->badge()
-                    ->color('success')
-                    ->weight('bold'),
+                    ->money('IDR'),
 
             ])
             ->recordActions([

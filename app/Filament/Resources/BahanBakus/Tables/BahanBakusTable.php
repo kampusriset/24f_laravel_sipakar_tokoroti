@@ -17,25 +17,16 @@ class BahanBakusTable
                 TextColumn::make('nama_bahan')
                     ->searchable(),
                 TextColumn::make('satuan')
-                    ->searchable()
-                    ->badge()
-                    ->color('gray'),
+                    ->searchable(),
                 TextColumn::make('stok_saat_ini')
                     ->numeric()
-                    ->sortable()
-                    ->badge()
-                    ->color(fn ($record): string => 
-                        $record->stok_saat_ini <= $record->stok_minimum 
-                            ? 'danger' 
-                            : 'success'
-                    ),
+                    ->sortable(),
                 TextColumn::make('stok_minimum')
                     ->numeric()
                     ->sortable(),
                 TextColumn::make('harga_per_satuan')
                     ->numeric()
-                    ->sortable()
-                    ->money('IDR'),
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

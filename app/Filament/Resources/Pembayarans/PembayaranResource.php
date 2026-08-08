@@ -18,13 +18,7 @@ class PembayaranResource extends Resource
 {
     protected static ?string $model = Pembayaran::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBanknotes;
-
-    protected static ?string $navigationLabel = 'Pembayaran';
-
-    protected static ?string $modelLabel = 'Pembayaran';
-
-    protected static ?string $pluralModelLabel = 'Pembayaran';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'id_pembayaran';
 

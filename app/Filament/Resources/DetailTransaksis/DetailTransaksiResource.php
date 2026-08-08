@@ -19,13 +19,7 @@ class DetailTransaksiResource extends Resource
 {
     protected static ?string $model = DetailTransaksi::class;
 
-   protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedDocumentText;
-
-   protected static ?string $navigationLabel = 'Detail Transaksi';
-
-   protected static ?string $modelLabel = 'Detail Transaksi';
-
-    protected static ?string $pluralModelLabel = 'Detail Transaksi';
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'id_detail';
 

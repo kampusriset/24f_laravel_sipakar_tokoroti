@@ -27,15 +27,8 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login()
-            
-            // Warna custom untuk tema toko roti
             ->colors([
-                // Warna primary tetap dipertahankan
-                'primary' => Color::hex('#F59E0B'), // Amber/gold sebagai primary
-                // Tambahan warna custom
-                'brown' => Color::hex('#6B4226'),   // Coklat tua
-                'brown-light' => Color::hex('#A9754F'), // Coklat sedang
-                'cream' => Color::hex('#FFFBF2'),   // Krem/putih gading
+                'primary' => Color::Amber,
             ])
 
             ->discoverResources(
@@ -75,13 +68,9 @@ class AdminPanelProvider extends PanelProvider
                 Authenticate::class,
             ])
 
-            // Menambahkan Vite theme untuk custom CSS
-            ->viteTheme('resources/css/filament/admin/theme.css')
-
-            // Tanda titik koma (;) HANYA diletakkan di baris paling akhir
             ->renderHook(
                 'panels::auth.login.form.after',
-                fn (): string => Blade::render('@include("filament.hooks.login-button")')
+                fn (): string => Blade::render('@include("filament.hooks.login-button")'),
             );
     }
 }
