@@ -27,25 +27,110 @@
 
 /* Custom styling untuk sidebar dan topbar */
 .fi-sidebar {
-    background-color: var(--brand-gold) !important;
+    background: linear-gradient(180deg, #1f2937 0%, #111827 100%) !important;
 }
 
 .fi-topbar {
-    background-color: var(--brand-gold) !important;
-    border-bottom: 2px solid var(--brand-brown) !important;
+    background: #111827 !important;
+    border-bottom: 1px solid #374151 !important;
+}
+
+.fi-logo,
+.fi-topbar .fi-logo {
+    color: #f8fafc !important;
+    font-weight: 800 !important;
+}
+
+html:not(.dark) .fi-logo,
+html:not(.dark) .fi-topbar .fi-logo {
+    color: #f8fafc !important;
 }
 
 .fi-sidebar-item-active {
-    background-color: var(--brand-gold) !important;
-    color: var(--brand-brown) !important;
+    background-color: rgba(255, 255, 255, 0.10) !important;
+    color: #ffffff !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    box-shadow: none !important;
+}
+
+/* Filament memakai class `fi-active` pada elemen <li>, bukan `fi-sidebar-item-active`. */
+.fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
+    background: rgba(255, 255, 255, 0.12) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    border-radius: .65rem !important;
+    color: #ffffff !important;
+    box-shadow: none !important;
+}
+
+.fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-sidebar-item-label,
+.fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn .fi-sidebar-item-icon,
+.fi-sidebar .fi-sidebar-item.fi-active > .fi-sidebar-item-btn svg {
+    color: #ffffff !important;
+    fill: currentColor !important;
+    opacity: 1 !important;
+}
+
+.fi-sidebar .fi-sidebar-item > .fi-sidebar-item-btn:hover {
+    background: rgba(255, 255, 255, 0.08) !important;
+    color: #ffffff !important;
 }
 
 .fi-sidebar-item {
-    color: var(--brand-black) !important;
+    color: #ffffff !important;
+}
+
+.fi-sidebar .fi-sidebar-item-label,
+.fi-sidebar .fi-sidebar-group-label,
+.fi-sidebar .fi-sidebar-group-icon,
+.fi-sidebar .fi-sidebar-item-icon {
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
+
+.fi-sidebar-item-active,
+.fi-sidebar-item-active .fi-sidebar-item-label,
+.fi-sidebar-item-active .fi-sidebar-item-icon {
+    color: #ffffff !important;
+    opacity: 1 !important;
+}
+
+.dark .fi-sidebar-item-active,
+.dark .fi-sidebar-item-active .fi-sidebar-item-label,
+.dark .fi-sidebar-item-active .fi-sidebar-item-icon {
+    color: #ffffff !important;
+}
+
+/* Filament memberi warna sendiri pada elemen turunan menu aktif. */
+html:not(.dark) .fi-sidebar .fi-sidebar-item-active,
+html:not(.dark) .fi-sidebar .fi-sidebar-item-active *,
+html:not(.dark) .fi-sidebar .fi-sidebar-item-active svg {
+    color: #ffffff !important;
+    fill: currentColor !important;
+    opacity: 1 !important;
+}
+
+/* Menimpa background putih dari elemen navigasi Filament yang aktif. */
+.fi-sidebar .fi-sidebar-item-active > *,
+.fi-sidebar .fi-sidebar-item-active a,
+.fi-sidebar .fi-sidebar-item-active button,
+.fi-sidebar .fi-sidebar-item-active [class*='fi-sidebar-item'] {
+    background-color: transparent !important;
 }
 
 .fi-sidebar-item:hover {
-    background-color: rgb(252, 244, 244) !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.fi-sidebar-item:hover,
+.fi-sidebar-item:hover .fi-sidebar-item-label,
+.fi-sidebar-item:hover .fi-sidebar-item-icon {
+    color: #ffffff !important;
+}
+
+.fi-topbar .fi-global-search input,
+.fi-topbar .fi-global-search input::placeholder {
+    color: #ffffff !important;
+    opacity: 1 !important;
 }
 
 /* Styling untuk card dan konten */
@@ -180,4 +265,270 @@
 .fi-wi-stats-overview .fi-stat .fi-stat-value {
     color: #6B4226 !important;
     font-weight: 800 !important;
+}
+
+/* Perbaikan kontras pada mode gelap Filament. */
+.dark .fi-wi-chart {
+    background: #18181b !important;
+    border-color: #f59e0b !important;
+    color: #f4f4f5 !important;
+}
+
+.dark .fi-wi-chart .fi-section-header h3,
+.dark .fi-wi-chart .fi-section-header .fi-section-header-description,
+.dark .fi-wi-chart .fi-section-content,
+.dark .fi-wi-chart svg text {
+    color: #f4f4f5 !important;
+    fill: #f4f4f5 !important;
+}
+
+.dark .fi-wi-stats-overview .fi-stat {
+    background: #18181b !important;
+    border-color: #a9754f !important;
+}
+
+.dark .fi-wi-stats-overview .fi-stat .fi-stat-label,
+.dark .fi-wi-stats-overview .fi-stat .fi-stat-value {
+    color: #f4f4f5 !important;
+}
+
+.dark .fi-sidebar-item,
+.dark .fi-sidebar-item-active {
+    color: #fff7ed !important;
+}
+
+/* Dashboard admin: layout lebih lapang dan konsisten pada light/dark mode. */
+.fi-page {
+    background: #f8fafc !important;
+}
+
+.fi-page-header {
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+}
+
+.fi-page-header-heading {
+    font-size: clamp(1.5rem, 2vw, 2rem) !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.03em;
+}
+
+.fi-wi-stats-overview {
+    gap: 1rem !important;
+}
+
+.fi-wi-stats-overview .fi-stat {
+    min-height: 132px;
+    padding: 1.25rem !important;
+    background: linear-gradient(145deg, #1f1f23, #151517) !important;
+    border: 1px solid #3f3f46 !important;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, .18) !important;
+}
+
+.fi-wi-stats-overview .fi-stat:hover {
+    border-color: #f59e0b !important;
+    transform: translateY(-3px);
+    transition: transform .2s ease, border-color .2s ease;
+}
+
+.fi-wi-chart {
+    min-height: 370px;
+    overflow: hidden;
+    margin-top: 1rem;
+}
+
+.fi-wi-chart .fi-section-header {
+    padding: 1.25rem 1.5rem 1rem !important;
+}
+
+.fi-wi-chart .fi-section-content {
+    min-height: 300px;
+}
+
+@media (max-width: 768px) {
+    .fi-page-header {
+        padding-inline: 1rem;
+    }
+
+    .fi-wi-chart {
+        min-height: 320px;
+    }
+}
+
+/* Tema global seluruh halaman admin. */
+.fi-main,
+.fi-main-ctn {
+    background: #f8fafc !important;
+}
+
+.fi-section,
+.fi-ta-ctn,
+.fi-fo-component-ctn,
+.fi-modal-window,
+.fi-dropdown-panel {
+    background: #ffffff !important;
+    border-color: #e4e4e7 !important;
+    color: #27272a !important;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, .06) !important;
+}
+
+.dark .fi-page,
+.dark .fi-main,
+.dark .fi-main-ctn {
+    background: #09090b !important;
+}
+
+.dark .fi-section,
+.dark .fi-ta-ctn,
+.dark .fi-fo-component-ctn,
+.dark .fi-modal-window,
+.dark .fi-dropdown-panel {
+    background: #18181b !important;
+    border-color: #3f3f46 !important;
+    color: #f4f4f5 !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .16) !important;
+}
+
+/* Netralisasi warna putih bawaan tabel dan empty state pada dark mode. */
+.dark .fi-ta-header,
+.dark .fi-ta-header-toolbar,
+.dark .fi-ta-header-cell,
+.dark .fi-ta-content,
+.dark .fi-ta-empty-state,
+.dark .fi-ta-empty-state-icon {
+    background: #18181b !important;
+}
+
+.dark .fi-ta-header-cell,
+.dark .fi-ta-header-cell button,
+.dark .fi-ta-empty-state-label,
+.dark .fi-ta-empty-state-description,
+.dark .fi-ta-empty-state-icon {
+    color: #d4d4d8 !important;
+}
+
+.dark .fi-ta-header-cell {
+    border-color: #3f3f46 !important;
+}
+
+.dark .fi-ta-header-toolbar .fi-input,
+.dark .fi-ta-search-field input,
+.dark .fi-topbar .fi-global-search input {
+    background: #27272a !important;
+    border-color: #52525b !important;
+    color: #fafafa !important;
+}
+
+.dark .fi-ta-empty-state-icon {
+    background: #3f3f46 !important;
+    color: #d4d4d8 !important;
+}
+
+.fi-section-header-heading,
+.fi-section-header-description,
+.fi-ta-header-cell,
+.fi-ta-cell,
+.fi-fo-field-wrp-label,
+.fi-fo-field-wrp-helper-text,
+.fi-modal-heading,
+.fi-dropdown-list-item-label {
+    color: #27272a !important;
+}
+
+.fi-section-header-description,
+.fi-fo-field-wrp-helper-text,
+.fi-ta-header-cell {
+    color: #71717a !important;
+}
+
+.dark .fi-section-header-heading,
+.dark .fi-section-header-description,
+.dark .fi-ta-header-cell,
+.dark .fi-ta-cell,
+.dark .fi-fo-field-wrp-label,
+.dark .fi-fo-field-wrp-helper-text,
+.dark .fi-modal-heading,
+.dark .fi-dropdown-list-item-label {
+    color: #f4f4f5 !important;
+}
+
+.dark .fi-section-header-description,
+.dark .fi-fo-field-wrp-helper-text,
+.dark .fi-ta-header-cell {
+    color: #a1a1aa !important;
+}
+
+.fi-input,
+.fi-select-input,
+.fi-fo-field-wrp textarea,
+.fi-fo-field-wrp input,
+.fi-fo-field-wrp select {
+    background: #ffffff !important;
+    border-color: #d4d4d8 !important;
+    color: #27272a !important;
+}
+
+.fi-input::placeholder,
+.fi-fo-field-wrp input::placeholder,
+.fi-fo-field-wrp textarea::placeholder {
+    color: #71717a !important;
+    opacity: 1 !important;
+}
+
+.dark .fi-input,
+.dark .fi-select-input,
+.dark .fi-fo-field-wrp textarea,
+.dark .fi-fo-field-wrp input,
+.dark .fi-fo-field-wrp select {
+    background: #27272a !important;
+    border-color: #52525b !important;
+    color: #fafafa !important;
+}
+
+.dark .fi-input::placeholder,
+.dark .fi-fo-field-wrp input::placeholder,
+.dark .fi-fo-field-wrp textarea::placeholder {
+    color: #a1a1aa !important;
+}
+
+.fi-input:focus,
+.fi-select-input:focus,
+.fi-fo-field-wrp textarea:focus,
+.fi-fo-field-wrp input:focus,
+.fi-fo-field-wrp select:focus {
+    border-color: #f59e0b !important;
+    box-shadow: 0 0 0 2px rgba(245, 158, 11, .25) !important;
+}
+
+.fi-ta-row {
+    border-color: #27272a !important;
+}
+
+.fi-ta-row:hover,
+.fi-dropdown-list-item:hover {
+    background: #f4f4f5 !important;
+}
+
+.dark .fi-ta-row:hover,
+.dark .fi-dropdown-list-item:hover {
+    background: #27272a !important;
+}
+
+.fi-badge {
+    font-weight: 700 !important;
+}
+
+.fi-btn {
+    border-radius: .65rem !important;
+    font-weight: 600 !important;
+}
+
+.fi-btn-primary {
+    background: #f59e0b !important;
+    color: #18181b !important;
+}
+
+.fi-btn-primary:hover {
+    background: #fbbf24 !important;
 }

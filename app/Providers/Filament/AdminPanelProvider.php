@@ -26,6 +26,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->brandName('Floura Bakery')
             ->login()
             
             // Warna custom untuk tema toko roti
