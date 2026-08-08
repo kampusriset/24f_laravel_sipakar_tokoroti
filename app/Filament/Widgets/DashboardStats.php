@@ -22,25 +22,25 @@ class DashboardStats extends StatsOverviewWidget
 
         return [
 
-            Stat::make('📦 Total Produk', $totalProduk . ' Produk')
+            Stat::make('Total Produk', $totalProduk . ' Produk')
                 ->description('Jumlah seluruh produk yang tersedia')
                 ->descriptionIcon('heroicon-m-cube')
                 ->color('success'),
 
-            Stat::make('🛒 Total Transaksi', $totalTransaksi . ' Transaksi')
-                ->description('Transaksi yang telah tercatat')
+            Stat::make('Total Transaksi', $totalTransaksi . ' Transaksi')
+                ->description('Transaksi yang sudah tercatat')
                 ->descriptionIcon('heroicon-m-shopping-cart')
                 ->color('primary'),
 
             Stat::make(
-                '💰 Total Pendapatan',
+                'Total Pendapatan',
                 'Rp ' . number_format($totalPendapatan, 0, ',', '.')
             )
                 ->description('Akumulasi pendapatan toko')
                 ->descriptionIcon('heroicon-m-banknotes')
                 ->color('warning'),
 
-            Stat::make('⚠️ Stok Menipis', $stokMenipis . ' Produk')
+            Stat::make('Stok Menipis', $stokMenipis . ' Produk')
                 ->description('Produk dengan stok ≤ 10')
                 ->descriptionIcon('heroicon-m-exclamation-triangle')
                 ->color('danger'),
