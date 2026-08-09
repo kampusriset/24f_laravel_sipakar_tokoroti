@@ -21,6 +21,8 @@ class BahanBakuResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static ?string $navigationLabel = 'Bahan Baku';
+
     protected static ?string $recordTitleAttribute = 'nama_bahan';
 
     public static function form(Schema $schema): Schema

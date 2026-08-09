@@ -14,6 +14,7 @@ use App\Models\Transaksi;
 use App\Services\FuzzyTsukamotoService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 Route::get('/', function () {
     return view('storefront.home');
@@ -102,6 +103,134 @@ Route::middleware(['auth'])->prefix('kasir')->name('kasir.')->group(function () 
 
         return view('kasir.transaksi-create', compact('products'));
     })->name('transaksi.create');
+
+    Route::post('/transaksi', function (Request $request) {
+        $validated = $request->validate([
+            'items' => ['required', 'array', 'min:1'],
+            'items.*.id_produk' => ['required', 'integer', 'distinct', 'exists:produk,id_produk'],
+            'items.*.jumlah' => ['required', 'integer', 'min:1'],
+        ], [
+            'items.required' => 'Pilih minimal satu produk untuk transaksi.',
+        ]);
+
+        $transaction = DB::transaction(function () use ($validated) {
+            $transaction = Transaksi::create([
+                'tanggal_transaksi' => now(),
+                'total_bayar' => 0,
+                'status_transaksi' => 'Pending',
+            ]);
+
+            foreach ($validated['items'] as $item) {
+                $stock = StokProduk::where('id_produk', $item['id_produk'])
+                    ->lockForUpdate()
+                    ->first();
+
+                if (!$stock || $stock->jumlah_stok < $item['jumlah']) {
+                    throw ValidationException::withMessages([
+                        'items' => 'Stok produk tidak mencukupi. Periksa kembali keranjang Anda.',
+                    ]);
+                }
+
+                $product = Produk::findOrFail($item['id_produk']);
+                $price = (float) $product->harga_jual;
+
+                DetailTransaksi::create([
+                    'id_transaksi' => $transaction->id_transaksi,
+                    'id_produk' => $product->id_produk,
+                    'jumlah' => $item['jumlah'],
+                    'harga_satuan' => $price,
+                    'subtotal' => $price * $item['jumlah'],
+                ]);
+            }
+
+            return $transaction->fresh();
+        });
+
+        return redirect()
+            ->route('kasir.transaksi.index')
+            ->with('status', 'Transaksi TRX-'.str_pad($transaction->id_transaksi, 4, '0', STR_PAD_LEFT).' berhasil dibuat.');
+    })->name('transaksi.store');
+
+    Route::get('/transaksi/{transaksi}/edit', function (Transaksi $transaksi) {
+        if ($transaksi->status_transaksi !== 'Pending') {
+            return redirect()->route('kasir.transaksi.index')->with('error', 'Hanya transaksi berstatus Pending yang dapat diubah.');
+        }
+
+        try {
+            $products = Produk::with(['kategori', 'stok'])
+                ->latest('id_produk')
+                ->limit(12)
+                ->get();
+            $transactionItems = $transaksi->detail()->with('produk.stok')->get();
+        } catch (Throwable) {
+            $products = collect();
+            $transactionItems = collect();
+        }
+
+        return view('kasir.transaksi-edit', compact('transaksi', 'products', 'transactionItems'));
+    })->name('transaksi.edit');
+
+    Route::put('/transaksi/{transaksi}', function (Request $request, Transaksi $transaksi) {
+        if ($transaksi->status_transaksi !== 'Pending') {
+            return redirect()->route('kasir.transaksi.index')->with('error', 'Hanya transaksi berstatus Pending yang dapat diubah.');
+        }
+
+        $validated = $request->validate([
+            'items' => ['required', 'array', 'min:1'],
+            'items.*.id_produk' => ['required', 'integer', 'distinct', 'exists:produk,id_produk'],
+            'items.*.jumlah' => ['required', 'integer', 'min:1'],
+        ], [
+            'items.required' => 'Pilih minimal satu produk untuk transaksi.',
+        ]);
+
+        DB::transaction(function () use ($validated, $transaksi) {
+            foreach ($transaksi->detail as $oldItem) {
+                $oldItem->delete();
+            }
+
+            foreach ($validated['items'] as $item) {
+                // Not decrementing/incrementing stock real-world logic since this is simplified breeze POS, 
+                // but checking if there's enough stock
+                $stock = StokProduk::where('id_produk', $item['id_produk'])
+                    ->lockForUpdate()
+                    ->first();
+
+                if (!$stock || $stock->jumlah_stok < $item['jumlah']) {
+                    throw ValidationException::withMessages([
+                        'items' => 'Stok produk tidak mencukupi untuk update.',
+                    ]);
+                }
+
+                $product = Produk::findOrFail($item['id_produk']);
+                $price = (float) $product->harga_jual;
+
+                DetailTransaksi::create([
+                    'id_transaksi' => $transaksi->id_transaksi,
+                    'id_produk' => $product->id_produk,
+                    'jumlah' => $item['jumlah'],
+                    'harga_satuan' => $price,
+                    'subtotal' => $price * $item['jumlah'],
+                ]);
+            }
+        });
+
+        return redirect()
+            ->route('kasir.transaksi.index')
+            ->with('status', 'Transaksi TRX-'.str_pad($transaksi->id_transaksi, 4, '0', STR_PAD_LEFT).' berhasil diubah.');
+    })->name('transaksi.update');
+
+    Route::delete('/transaksi/{transaksi}', function (Transaksi $transaksi) {
+        if ($transaksi->status_transaksi !== 'Pending') {
+            return redirect()->route('kasir.transaksi.index')->with('error', 'Hanya transaksi berstatus Pending yang dapat dihapus.');
+        }
+
+        DB::transaction(function () use ($transaksi) {
+            $transaksi->detail()->delete();
+            $transaksi->delete();
+        });
+
+        return redirect()->route('kasir.transaksi.index')->with('status', 'Transaksi berhasil dihapus.');
+    })->name('transaksi.destroy');
 
     Route::get('/transaksi', function () {
         try {

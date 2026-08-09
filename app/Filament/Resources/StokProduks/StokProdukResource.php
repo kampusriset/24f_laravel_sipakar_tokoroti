@@ -21,6 +21,8 @@ class StokProdukResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static ?string $navigationLabel = 'Stok Produk';
+
     public static function form(Schema $schema): Schema
     {
         return StokProdukForm::configure($schema);

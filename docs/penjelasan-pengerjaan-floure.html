@@ -1,0 +1,445 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <title>Penjelasan Pengerjaan Website Floure Bakery</title>
+    <style>
+        @page {
+            margin: 34px 42px;
+        }
+
+        body {
+            margin: 0;
+            color: #2f2117;
+            background: #ffffff;
+            font-family: DejaVu Sans, Arial, sans-serif;
+            font-size: 12px;
+            line-height: 1.58;
+        }
+
+        .cover {
+            padding: 42px 0 28px;
+            border-bottom: 4px solid #3f7659;
+        }
+
+        .kicker {
+            margin: 0 0 12px;
+            color: #c85151;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 0;
+            max-width: 620px;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 38px;
+            line-height: 1.08;
+        }
+
+        .subtitle {
+            max-width: 650px;
+            margin: 16px 0 0;
+            color: #6d5c4f;
+            font-size: 14px;
+        }
+
+        .meta {
+            display: table;
+            width: 100%;
+            margin-top: 26px;
+        }
+
+        .meta div {
+            display: table-cell;
+            width: 33.33%;
+            padding-right: 16px;
+            color: #6d5c4f;
+            font-size: 11px;
+        }
+
+        .meta strong {
+            display: block;
+            color: #2f2117;
+            font-size: 13px;
+        }
+
+        h2 {
+            margin: 28px 0 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #ead8c4;
+            color: #2f2117;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 22px;
+        }
+
+        h3 {
+            margin: 18px 0 8px;
+            color: #3f7659;
+            font-size: 14px;
+        }
+
+        p {
+            margin: 0 0 9px;
+        }
+
+        ul, ol {
+            margin: 7px 0 12px 18px;
+            padding: 0;
+        }
+
+        li {
+            margin: 4px 0;
+        }
+
+        table {
+            width: 100%;
+            margin: 10px 0 14px;
+            border-collapse: collapse;
+            page-break-inside: avoid;
+        }
+
+        th, td {
+            padding: 9px 10px;
+            border: 1px solid #ead8c4;
+            vertical-align: top;
+        }
+
+        th {
+            background: #f7ead9;
+            color: #3f2a1d;
+            text-align: left;
+        }
+
+        .note {
+            margin: 10px 0 14px;
+            padding: 12px 14px;
+            border-left: 4px solid #3f7659;
+            background: #fff8ed;
+        }
+
+        .flow {
+            margin: 10px 0 14px;
+            padding: 12px 14px;
+            border: 1px solid #ead8c4;
+            border-radius: 10px;
+            background: #fffdf9;
+            page-break-inside: avoid;
+        }
+
+        .flow strong {
+            color: #3f7659;
+        }
+
+        .tag {
+            display: inline-block;
+            margin: 2px 4px 2px 0;
+            padding: 3px 7px;
+            border-radius: 999px;
+            background: #edf7f1;
+            color: #2f674d;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+    </style>
+</head>
+<body>
+    <section class="cover">
+        <p class="kicker">Dokumentasi Pengerjaan</p>
+        <h1>Website Floure Bakery</h1>
+        <p class="subtitle">
+            Laporan ini menjelaskan proses pengerjaan aplikasi toko roti dari awal,
+            bahasa dan teknologi yang digunakan, tujuan website, fitur yang berjalan,
+            serta alur penggunaan berdasarkan tiga role: pelanggan, kasir, dan admin.
+        </p>
+
+        <div class="meta">
+            <div>
+                <strong>Nama Website</strong>
+                Floure Bakery
+            </div>
+            <div>
+                <strong>Jenis Aplikasi</strong>
+                Website toko roti dan kasir
+            </div>
+            <div>
+                <strong>Framework</strong>
+                Laravel
+            </div>
+        </div>
+    </section>
+
+    <h2>1. Gambaran Umum Website</h2>
+    <p>
+        Floure Bakery adalah website untuk toko roti yang menyediakan dua sisi utama:
+        halaman publik untuk pelanggan dan halaman internal untuk pengelolaan kasir/admin.
+        Pelanggan dapat melihat landing page, membuka daftar produk, melihat detail harga,
+        memasukkan produk ke keranjang, dan melakukan checkout melalui alur form pemesanan.
+    </p>
+    <p>
+        Untuk pihak toko, aplikasi menyediakan dashboard, halaman transaksi, pembayaran,
+        CRUD produk, CRUD stok produk, dan halaman AI rekomendasi produk. AI rekomendasi
+        memakai metode Fuzzy Tsukamoto untuk membantu kasir memilih produk paling cocok
+        berdasarkan budget, tingkat manis, alergi, dan keperluan pelanggan.
+    </p>
+
+    <div class="note">
+        Fokus aplikasi adalah membuat proses pemesanan dan pengelolaan produk toko roti
+        menjadi lebih mudah, dengan tampilan visual yang konsisten antara landing page,
+        halaman produk, dan area kasir.
+    </div>
+
+    <h2>2. Bahasa dan Teknologi yang Digunakan</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Bagian</th>
+                <th>Teknologi</th>
+                <th>Fungsi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Backend</td>
+                <td>PHP 8.3 dan Laravel 13</td>
+                <td>Mengatur route, validasi, login, database model, transaksi, dashboard, dan proses rekomendasi.</td>
+            </tr>
+            <tr>
+                <td>Frontend</td>
+                <td>Blade, HTML, CSS, JavaScript</td>
+                <td>Membuat tampilan landing page, produk, keranjang, checkout, login, dashboard, dan halaman kasir.</td>
+            </tr>
+            <tr>
+                <td>Autentikasi</td>
+                <td>Laravel Breeze</td>
+                <td>Menyediakan login, register, logout, session, profile, dan pembatasan halaman internal.</td>
+            </tr>
+            <tr>
+                <td>Admin Panel</td>
+                <td>Filament</td>
+                <td>Menyediakan panel admin di /admin untuk dashboard, produk, stok, transaksi, pembayaran, user, pegawai, bahan baku, dan rekomendasi produk.</td>
+            </tr>
+            <tr>
+                <td>Database</td>
+                <td>MySQL/MariaDB melalui Eloquent ORM</td>
+                <td>Menyimpan data produk, kategori, stok, transaksi, detail transaksi, pembayaran, bahan baku, pegawai, dan user.</td>
+            </tr>
+            <tr>
+                <td>AI Rekomendasi</td>
+                <td>Fuzzy Tsukamoto</td>
+                <td>Menghitung kecocokan produk berdasarkan input pelanggan dan menampilkan Top 3 rekomendasi.</td>
+            </tr>
+            <tr>
+                <td>Export</td>
+                <td>Laravel DomPDF dan Maatwebsite Excel</td>
+                <td>Mendukung pembuatan laporan PDF/Excel untuk transaksi dan stok.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>3. Pengerjaan dari Awal</h2>
+    <ol>
+        <li>
+            Membuat struktur aplikasi Laravel sebagai dasar backend, routing, view, model,
+            migration, controller, dan autentikasi.
+        </li>
+        <li>
+            Membuat skema data toko roti, yaitu kategori produk, produk, stok produk,
+            transaksi, detail transaksi, pembayaran, bahan baku, pegawai, dan user.
+        </li>
+        <li>
+            Menyiapkan login khusus untuk kasir dan admin. Halaman login diberi tanda bahwa
+            akses tersebut hanya untuk role internal toko, sedangkan pelanggan tetap memakai
+            halaman publik tanpa login.
+        </li>
+        <li>
+            Membuat landing page sebagai halaman pertama saat website dibuka. Tampilan dibuat
+            berisi identitas Floure Bakery, hero image, tombol menuju menu, dan bagian produk unggulan.
+        </li>
+        <li>
+            Membuat halaman menu/produk yang berisi daftar roti sesuai data produk. Card produk
+            dilengkapi gambar, nama, deskripsi, harga, tombol tambah ke keranjang, dan modal detail.
+        </li>
+        <li>
+            Membuat fitur keranjang dan checkout pada halaman publik. Alur checkout tidak diarahkan
+            ke WhatsApp, tetapi memakai form pemesanan di dalam website.
+        </li>
+        <li>
+            Membuat halaman Tentang Kami dan Kontak agar website publik memiliki informasi toko,
+            suasana bakery, dan informasi kontak dengan gambar pendukung.
+        </li>
+        <li>
+            Membuat dashboard kasir dengan kartu statistik, grafik produk terlaris, distribusi
+            kategori, grafik penjualan bulanan, dan tren pendapatan bulanan.
+        </li>
+        <li>
+            Membuat halaman kasir untuk transaksi, riwayat transaksi, pembayaran, CRUD produk,
+            CRUD stok produk, dan AI rekomendasi.
+        </li>
+        <li>
+            Menyesuaikan desain tombol, warna, card, dan layout agar tampilan kasir dan halaman
+            publik terasa konsisten dengan warna hijau, krem, cokelat, dan aksen bakery.
+        </li>
+    </ol>
+
+    <h2>4. Data Produk yang Digunakan</h2>
+    <p>Produk menu disesuaikan dengan data roti berikut.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Nama Produk</th>
+                <th>Kategori</th>
+                <th>Harga</th>
+                <th>Deskripsi</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Roti Tawar Putih</td><td>Roti Tawar</td><td>Rp 18.000</td><td>Roti tawar putih tanpa kulit, 500gr.</td></tr>
+            <tr><td>Roti Tawar Gandum</td><td>Roti Tawar</td><td>Rp 22.000</td><td>Roti tawar gandum utuh, tinggi serat.</td></tr>
+            <tr><td>Roti Coklat</td><td>Roti Manis</td><td>Rp 8.000</td><td>Roti manis isian coklat melt.</td></tr>
+            <tr><td>Roti Keju</td><td>Roti Manis</td><td>Rp 8.500</td><td>Roti manis isian keju cheddar.</td></tr>
+            <tr><td>Nastar</td><td>Kue Kering</td><td>Rp 45.000</td><td>Kue nastar isian nanas, 250gr.</td></tr>
+            <tr><td>Kastengel</td><td>Kue Kering</td><td>Rp 50.000</td><td>Kue keju gurih, 250gr.</td></tr>
+            <tr><td>Croissant</td><td>Pastry</td><td>Rp 12.000</td><td>Croissant mentega, crispy.</td></tr>
+            <tr><td>Brownies Kukus</td><td>Kue Basah</td><td>Rp 35.000</td><td>Brownies coklat kukus, loyang 20x20.</td></tr>
+            <tr><td>Lapis Legit</td><td>Kue Basah</td><td>Rp 120.000</td><td>Kue lapis legit tradisional.</td></tr>
+        </tbody>
+    </table>
+
+    <h2>5. Modul yang Berjalan</h2>
+    <h3>Halaman Publik</h3>
+    <p>
+        Halaman publik terdiri dari Beranda, Produk/Menu, Tentang Kami, dan Kontak.
+        Beranda menjadi halaman awal saat membuka website. Produk dapat dibuka detailnya,
+        dimasukkan ke keranjang, lalu diproses melalui checkout internal.
+    </p>
+
+    <h3>Halaman Kasir</h3>
+    <p>
+        Area kasir hanya bisa dibuka setelah login. Di dalamnya tersedia dashboard,
+        transaksi, riwayat transaksi, pembayaran, inventori produk, stok produk, dan
+        AI rekomendasi produk.
+    </p>
+
+        <h3>Panel Admin</h3>
+        <p>
+        Panel admin memakai Filament dengan alamat /admin. Tampilan panel disesuaikan
+        agar mirip contoh, yaitu sidebar oranye, brand Laravel, menu di sisi kiri, card
+        statistik, dan grafik dashboard. Admin dapat mengelola data utama seperti produk,
+        stok produk, transaksi, pembayaran, user, pegawai, bahan baku, dan rekomendasi
+        produk. Beberapa operasi sensitif, seperti membuat, mengubah, dan menghapus data
+        master, tetap dibatasi untuk role admin.
+    </p>
+
+    <h2>6. Alur Website Berdasarkan 3 Role</h2>
+    <div class="flow">
+        <h3>Role 1: Pelanggan</h3>
+        <p><strong>Tujuan:</strong> melihat produk dan melakukan pemesanan tanpa login.</p>
+        <ol>
+            <li>Pelanggan membuka website dan langsung masuk ke landing page Floure Bakery.</li>
+            <li>Pelanggan melihat informasi utama toko, produk unggulan, dan tombol menuju menu.</li>
+            <li>Pelanggan membuka halaman Produk/Menu untuk melihat daftar roti.</li>
+            <li>Pelanggan menekan produk untuk melihat detail nama, gambar, deskripsi, dan harga.</li>
+            <li>Pelanggan menekan tombol tambah untuk menyimpan produk ke keranjang.</li>
+            <li>Pelanggan membuka keranjang, mengatur jumlah produk, lalu menekan checkout.</li>
+            <li>Pelanggan mengisi nama, nomor telepon, metode pesanan, waktu ambil/kirim, dan catatan.</li>
+            <li>Website menampilkan ringkasan pesanan dan status berhasil tanpa mengirim pesan ke WhatsApp.</li>
+        </ol>
+    </div>
+
+    <div class="flow">
+        <h3>Role 2: Kasir</h3>
+        <p><strong>Tujuan:</strong> membantu transaksi harian, melihat pembayaran, mengatur stok, dan memberi rekomendasi produk.</p>
+        <ol>
+            <li>Kasir membuka halaman login khusus Kasir/Admin.</li>
+            <li>Setelah login, kasir masuk ke dashboard kasir.</li>
+            <li>Kasir dapat melihat ringkasan total produk, total transaksi, pendapatan, stok menipis, dan grafik.</li>
+            <li>Kasir masuk ke menu Transaksi untuk memilih produk dan menyusun keranjang transaksi.</li>
+            <li>Kasir melihat Riwayat Transaksi untuk memantau transaksi yang sudah tersimpan.</li>
+            <li>Kasir membuka Pembayaran untuk memantau data pembayaran pelanggan.</li>
+            <li>Kasir membuka Produk dan Stok Produk untuk menambah, mengubah, atau menghapus data melalui tampilan CRUD yang dibuat di halaman kasir.</li>
+            <li>Kasir membuka AI Rekomendasi, mengisi budget, tingkat manis, alergi, dan keperluan pelanggan.</li>
+            <li>Sistem menampilkan Top 3 produk rekomendasi berisi gambar, nama roti, harga, deskripsi, dan nilai fuzzy.</li>
+        </ol>
+    </div>
+
+    <div class="flow">
+        <h3>Role 3: Admin</h3>
+        <p><strong>Tujuan:</strong> mengelola data utama toko dan mengawasi operasional.</p>
+        <ol>
+            <li>Admin membuka /admin lalu login ke panel Filament.</li>
+            <li>Admin dapat membuka dashboard Filament untuk melihat statistik operasional toko.</li>
+            <li>Admin mengelola data master seperti produk, kategori produk, stok produk, bahan baku, pegawai, dan user.</li>
+            <li>Admin mengelola data transaksi, detail transaksi, dan pembayaran.</li>
+            <li>Admin dapat melakukan operasi yang lebih sensitif seperti membuat, mengubah, dan menghapus data yang dibatasi oleh policy admin.</li>
+            <li>Admin dapat menggunakan fitur laporan/export untuk kebutuhan dokumentasi transaksi dan stok.</li>
+        </ol>
+    </div>
+
+    <h2>7. Alur AI Rekomendasi Produk</h2>
+    <p>
+        AI rekomendasi pada website ini menggunakan metode Fuzzy Tsukamoto. Input yang
+        diberikan oleh kasir adalah budget, tingkat manis, alergi, dan keperluan.
+        Sistem menghitung derajat keanggotaan dari setiap input, mencocokkannya dengan
+        rule base produk, lalu menghasilkan nilai fuzzy untuk setiap produk.
+    </p>
+    <p>
+        Output yang ditampilkan adalah Top 3 rekomendasi. Setiap rekomendasi menampilkan
+        gambar produk, nama roti, harga, deskripsi singkat, dan nilai fuzzy. Semakin tinggi
+        nilai fuzzy, semakin cocok produk tersebut dengan preferensi yang dimasukkan.
+    </p>
+    <p>
+        Variabel fuzzy yang digunakan:
+        <span class="tag">Budget: murah, sedang, mahal</span>
+        <span class="tag">Manis: rendah, sedang, tinggi</span>
+        <span class="tag">Alergi: Tidak Ada, Gluten, Susu, Telur</span>
+        <span class="tag">Keperluan: Sarapan, Cemilan, Oleh-oleh, Hadiah</span>
+    </p>
+
+    <h2>8. Struktur Halaman Utama</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>URL</th>
+                <th>Halaman</th>
+                <th>Keterangan</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>/</td><td>Beranda</td><td>Landing page utama Floure Bakery.</td></tr>
+            <tr><td>/menu</td><td>Produk/Menu</td><td>Daftar produk, detail produk, keranjang, dan checkout.</td></tr>
+            <tr><td>/tentang</td><td>Tentang Kami</td><td>Informasi toko dan cerita singkat Floure Bakery.</td></tr>
+            <tr><td>/kontak</td><td>Kontak</td><td>Informasi kontak dan lokasi.</td></tr>
+            <tr><td>/login</td><td>Login Kasir/Admin</td><td>Akses internal untuk kasir dan admin.</td></tr>
+            <tr><td>/dashboard</td><td>Dashboard</td><td>Ringkasan statistik operasional setelah login.</td></tr>
+            <tr><td>/kasir/transaksi/buat</td><td>Buat Transaksi</td><td>Halaman transaksi kasir.</td></tr>
+            <tr><td>/kasir/transaksi</td><td>Riwayat Transaksi</td><td>Daftar transaksi toko.</td></tr>
+            <tr><td>/kasir/pembayaran</td><td>Pembayaran</td><td>Monitoring pembayaran.</td></tr>
+            <tr><td>/kasir/produk</td><td>CRUD Produk</td><td>Tambah, ubah, dan hapus produk.</td></tr>
+            <tr><td>/kasir/stok</td><td>CRUD Stok</td><td>Tambah, ubah, dan hapus stok produk.</td></tr>
+            <tr><td>/kasir/ai-rekomendasi</td><td>AI Rekomendasi</td><td>Rekomendasi produk dengan Fuzzy Tsukamoto.</td></tr>
+            <tr><td>/admin</td><td>Panel Admin</td><td>Panel Filament untuk dashboard dan pengelolaan data utama.</td></tr>
+        </tbody>
+    </table>
+
+    <h2>9. Kesimpulan</h2>
+    <p>
+        Website Floure Bakery sudah dibuat sebagai aplikasi toko roti dengan landing page,
+        katalog produk, keranjang, checkout internal, login kasir/admin, dashboard, CRUD
+        produk dan stok, serta AI rekomendasi produk. Alur pelanggan dibuat sederhana
+        tanpa login, sementara kasir dan admin memakai autentikasi untuk mengakses fitur
+        operasional toko.
+    </p>
+    <p>
+        Dengan pembagian role tersebut, pelanggan fokus pada pemesanan, kasir fokus pada
+        transaksi harian dan rekomendasi, sedangkan admin fokus pada pengelolaan data
+        dan pengawasan operasional.
+    </p>
+</body>
+</html>

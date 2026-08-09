@@ -12,45 +12,16 @@
                 <a href="{{ route('kasir.transaksi.index') }}" class="kasir-action">Riwayat Transaksi</a>
             </header>
 
-            <section class="pos-layout">
-                <article class="kasir-card">
-                    <div class="kasir-card-head">
-                        <h2 class="kasir-card-title">Pilih Produk</h2>
-                        <span class="kasir-pill">{{ $products->count() }} item</span>
-                    </div>
+            @if ($errors->any())
+                <div class="kasir-alert kasir-alert-error">{{ $errors->first() }}</div>
+            @endif
 
-                    @if($products->isNotEmpty())
-                        <div class="kasir-grid" style="padding: 1rem;">
-                            @foreach($products as $product)
-                                <div class="kasir-product">
-                                    <div style="display:flex;justify-content:space-between;gap:.75rem;">
-                                        <span class="kasir-product-mark">{{ strtoupper(substr($product->nama_produk, 0, 1)) }}</span>
-                                        <span class="kasir-status {{ ($product->stok?->jumlah_stok ?? 0) <= 10 ? 'danger' : '' }}">Stok {{ $product->stok?->jumlah_stok ?? 0 }}</span>
-                                    </div>
-                                    <h3 class="kasir-product-name">{{ $product->nama_produk }}</h3>
-                                    <div class="kasir-muted">{{ $product->kategori?->nama_kategori ?? 'Tanpa kategori' }}</div>
-                                    <div class="kasir-product-price">Rp {{ number_format($product->harga_jual, 0, ',', '.') }}</div>
-                                </div>
-                            @endforeach
-                        </div>
-                    @else
-                        <div class="kasir-empty">Belum ada produk untuk dipilih.</div>
-                    @endif
+                <article class="kasir-card" style="padding: 2rem;">
+                    <div style="margin-bottom: 2rem;">
+                        <h2 class="kasir-card-title text-2xl font-bold">Create Detail Transaksi</h2>
+                    </div>
+                    @livewire('kasir.detail-transaksi-form')
                 </article>
-
-                <aside class="kasir-card">
-                    <div class="kasir-card-head">
-                        <h2 class="kasir-card-title">Keranjang</h2>
-                        <span class="kasir-pill">Draft</span>
-                    </div>
-                    <div class="order-box">
-                        <p class="kasir-muted">Keranjang visual siap dipakai untuk alur kasir Breeze. Integrasi simpan transaksi bisa ditambahkan berikutnya.</p>
-                        <div class="order-total">
-                            <span>Total</span>
-                            <span>Rp 0</span>
-                        </div>
-                    </div>
-                </aside>
             </section>
         </div>
     </div>

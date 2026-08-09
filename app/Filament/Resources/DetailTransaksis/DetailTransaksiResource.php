@@ -21,6 +21,8 @@ class DetailTransaksiResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static ?string $navigationLabel = 'Detail Transaksi';
+
     protected static ?string $recordTitleAttribute = 'id_detail';
 
     public static function form(Schema $schema): Schema

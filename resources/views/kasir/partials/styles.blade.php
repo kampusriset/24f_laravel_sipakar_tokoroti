@@ -76,6 +76,12 @@
         font-weight: 850;
     }
 
+    .kasir-alert-error {
+        border-color: rgba(190, 24, 93, .2);
+        background: #fff1f2;
+        color: #be123c;
+    }
+
     .kasir-card {
         overflow: hidden;
         border: 1px solid rgba(133, 91, 58, .16);
@@ -328,6 +334,67 @@
 
     .order-box {
         padding: 1rem;
+    }
+
+    .cart-items {
+        display: grid;
+        gap: .7rem;
+    }
+
+    .cart-line {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: .65rem;
+        align-items: center;
+        padding-bottom: .7rem;
+        border-bottom: 1px solid rgba(133, 91, 58, .1);
+    }
+
+    .cart-line strong,
+    .cart-line span {
+        display: block;
+    }
+
+    .cart-line strong {
+        font-size: .82rem;
+    }
+
+    .cart-line > div:first-child span {
+        margin-top: .2rem;
+        color: #8b7868;
+        font-size: .74rem;
+        font-weight: 700;
+    }
+
+    .cart-controls {
+        display: flex;
+        align-items: center;
+        gap: .4rem;
+    }
+
+    .cart-controls button {
+        display: grid;
+        width: 1.7rem;
+        height: 1.7rem;
+        place-items: center;
+        border: 1px solid #ead8c4;
+        border-radius: .5rem;
+        background: #fffdf9;
+        color: #633116;
+        cursor: pointer;
+        font: inherit;
+        font-weight: 950;
+    }
+
+    .cart-controls button:disabled,
+    .kasir-button:disabled {
+        opacity: .5;
+        cursor: not-allowed;
+    }
+
+    .checkout-button {
+        width: 100%;
+        margin-top: 1rem;
     }
 
     .order-total {

@@ -24,12 +24,10 @@ class DashboardStats extends StatsOverviewWidget
 
             Stat::make('📦 Total Produk', $totalProduk . ' Produk')
                 ->description('Jumlah seluruh produk yang tersedia')
-                ->descriptionIcon('heroicon-m-cube')
                 ->color('success'),
 
             Stat::make('🛒 Total Transaksi', $totalTransaksi . ' Transaksi')
                 ->description('Transaksi yang telah tercatat')
-                ->descriptionIcon('heroicon-m-shopping-cart')
                 ->color('primary'),
 
             Stat::make(
@@ -37,12 +35,10 @@ class DashboardStats extends StatsOverviewWidget
                 'Rp ' . number_format($totalPendapatan, 0, ',', '.')
             )
                 ->description('Akumulasi pendapatan toko')
-                ->descriptionIcon('heroicon-m-banknotes')
                 ->color('warning'),
 
             Stat::make('⚠️ Stok Menipis', $stokMenipis . ' Produk')
                 ->description('Produk dengan stok ≤ 10')
-                ->descriptionIcon('heroicon-m-exclamation-triangle')
                 ->color('danger'),
 
         ];

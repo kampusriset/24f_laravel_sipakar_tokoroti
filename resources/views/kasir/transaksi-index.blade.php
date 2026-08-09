@@ -12,38 +12,11 @@
                 <a href="{{ route('kasir.transaksi.create') }}" class="kasir-action">Buat Transaksi</a>
             </header>
 
-            <article class="kasir-card">
-                <div class="kasir-card-head">
-                    <h2 class="kasir-card-title">Transaksi</h2>
-                    <span class="kasir-pill">{{ method_exists($transactions, 'total') ? $transactions->total() : $transactions->count() }} data</span>
+            <article class="kasir-card" style="padding: 1rem;">
+                <div style="margin-bottom: 2rem;">
+                    <h2 class="kasir-card-title text-2xl font-bold">Transaksis</h2>
                 </div>
-                @if($transactions->isNotEmpty())
-                    <div class="kasir-table-wrap">
-                        <table class="kasir-table">
-                            <thead>
-                                <tr>
-                                    <th>Kode</th>
-                                    <th>Tanggal</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($transactions as $transaction)
-                                    @php $status = $transaction->status_transaksi ?? 'Pending'; @endphp
-                                    <tr>
-                                        <td>TRX-{{ str_pad($transaction->id_transaksi, 4, '0', STR_PAD_LEFT) }}</td>
-                                        <td class="kasir-muted">{{ $transaction->tanggal_transaksi ? \Illuminate\Support\Carbon::parse($transaction->tanggal_transaksi)->format('d M Y') : '-' }}</td>
-                                        <td>Rp {{ number_format($transaction->total_bayar, 0, ',', '.') }}</td>
-                                        <td><span class="kasir-status {{ strtolower($status) === 'pending' ? 'warn' : '' }}">{{ $status }}</span></td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                @else
-                    <div class="kasir-empty">Belum ada transaksi.</div>
-                @endif
+                @livewire('kasir.transaksi-list')
             </article>
         </div>
     </div>

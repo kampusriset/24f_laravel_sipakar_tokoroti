@@ -21,6 +21,8 @@ class PegawaiResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static ?string $navigationLabel = 'Pegawai';
+
     protected static ?string $recordTitleAttribute = 'nama_pegawai';
 
     public static function form(Schema $schema): Schema

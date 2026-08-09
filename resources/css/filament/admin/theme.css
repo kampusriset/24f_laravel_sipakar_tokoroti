@@ -2,3 +2,299 @@
 
 @source '../../../../app/Filament/**/*';
 @source '../../../../resources/views/filament/**/*';
+
+:root {
+    --floure-admin-orange: #d98513;
+    --floure-admin-orange-dark: #a45a0c;
+    --floure-admin-cream: #fff8ed;
+    --floure-admin-dark: #14110d;
+    --floure-admin-dark-soft: #1c1711;
+    --floure-admin-line: #ead8c4;
+    --floure-admin-text: #241914;
+    --floure-admin-muted: #7b6859;
+}
+
+.fi-body {
+    background:
+        linear-gradient(90deg, rgba(217, 133, 19, .92) 0, rgba(217, 133, 19, .92) 17.5rem, transparent 17.5rem),
+        #f8efe2 !important;
+    color: var(--floure-admin-text);
+}
+
+.fi-layout {
+    background: transparent !important;
+}
+
+.fi-simple-layout,
+.fi-simple-main-ctn {
+    background: #fff8ed !important;
+}
+
+.fi-simple-main {
+    background: #fffdf9 !important;
+    border: 1px solid rgba(120, 67, 9, .16) !important;
+    border-radius: .9rem !important;
+    box-shadow: 0 22px 46px rgba(93, 48, 7, .18) !important;
+}
+
+.fi-simple-header-heading,
+.fi-simple-header .fi-logo,
+.fi-simple-page-content {
+    color: var(--floure-admin-text) !important;
+}
+
+.fi-sidebar {
+    background: var(--floure-admin-orange) !important;
+    border-right: 1px solid rgba(120, 67, 9, .28) !important;
+    box-shadow: none !important;
+}
+
+.fi-sidebar-header {
+    min-height: 4.6rem !important;
+    background: var(--floure-admin-orange) !important;
+    border-bottom: 1px solid rgba(120, 67, 9, .24) !important;
+    box-shadow: none !important;
+}
+
+.fi-logo {
+    color: #3a1d0a !important;
+    font-size: 1rem !important;
+    font-weight: 900 !important;
+}
+
+.fi-sidebar-nav {
+    padding: 1rem .85rem !important;
+    background: var(--floure-admin-orange) !important;
+}
+
+.fi-sidebar-nav-groups {
+    gap: .8rem !important;
+}
+
+.fi-sidebar-group-label {
+    color: rgba(70, 35, 8, .72) !important;
+    font-size: .68rem !important;
+    font-weight: 900 !important;
+    letter-spacing: .08em !important;
+    text-transform: uppercase !important;
+}
+
+.fi-sidebar-item-button {
+    min-height: 2.45rem !important;
+    border-radius: .6rem !important;
+    color: #4f2a0c !important;
+    font-weight: 800 !important;
+}
+
+.fi-sidebar-item-button:hover {
+    background: rgba(255, 255, 255, .24) !important;
+}
+
+.fi-sidebar-item-active .fi-sidebar-item-button,
+.fi-sidebar-item-button[aria-current="page"] {
+    background: rgba(255, 255, 255, .78) !important;
+    color: #2f1a0a !important;
+    box-shadow: 0 12px 24px rgba(93, 48, 7, .16) !important;
+}
+
+.fi-sidebar-item-icon,
+.fi-sidebar-group-collapse-button {
+    color: #6b390c !important;
+}
+
+.fi-topbar {
+    background: var(--floure-admin-orange) !important;
+    border-bottom: 1px solid rgba(120, 67, 9, .28) !important;
+    box-shadow: none !important;
+}
+
+.fi-topbar nav,
+.fi-topbar-open-sidebar-btn,
+.fi-topbar-close-sidebar-btn {
+    background: var(--floure-admin-orange) !important;
+}
+
+.fi-topbar .fi-icon-btn {
+    color: #4f2a0c !important;
+}
+
+.fi-topbar .fi-input-wrp {
+    background: rgba(255, 253, 249, .9) !important;
+    border-color: rgba(120, 67, 9, .22) !important;
+    box-shadow: 0 8px 18px rgba(93, 48, 7, .12) !important;
+}
+
+.fi-main-ctn {
+    background: #fff8ed !important;
+}
+
+.fi-main {
+    padding: 2rem !important;
+}
+
+.fi-header-heading {
+    color: var(--floure-admin-text) !important;
+    font-size: 2rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 0 !important;
+}
+
+.fi-breadcrumbs,
+.fi-breadcrumbs-item,
+.fi-breadcrumbs-item a,
+.fi-header-subheading,
+.fi-header-description {
+    color: var(--floure-admin-muted) !important;
+}
+
+.fi-section,
+.fi-wi-widget .fi-section,
+.fi-wi-stats-overview-stat {
+    overflow: hidden !important;
+    border: 1px solid rgba(120, 67, 9, .16) !important;
+    border-radius: .8rem !important;
+    background: #fffdf9 !important;
+    box-shadow: 0 10px 22px rgba(86, 52, 24, .08) !important;
+}
+
+.fi-wi-stats-overview-stat {
+    min-height: 6.1rem !important;
+}
+
+.fi-section-header {
+    background: linear-gradient(180deg, #fffdf9, #fff7ec) !important;
+    border-bottom: 1px solid rgba(120, 67, 9, .14) !important;
+}
+
+.fi-section-header-heading,
+.fi-wi-stats-overview-stat-label {
+    color: #2f2117 !important;
+    font-weight: 900 !important;
+}
+
+.fi-section-header-description,
+.fi-wi-stats-overview-stat-description {
+    color: var(--floure-admin-muted) !important;
+    font-size: .78rem !important;
+    font-weight: 650 !important;
+}
+
+.fi-wi-stats-overview-stat-value {
+    color: #15100d !important;
+    font-size: 1.55rem !important;
+    font-weight: 950 !important;
+}
+
+.fi-ta,
+.fi-fo-component-ctn,
+.fi-in-entry-wrp {
+    border-radius: .8rem !important;
+}
+
+.fi-btn {
+    border-radius: .65rem !important;
+    font-weight: 900 !important;
+}
+
+.fi-btn-color-primary {
+    background: var(--floure-admin-orange) !important;
+    color: #fff !important;
+}
+
+.fi-btn-color-primary:hover {
+    background: var(--floure-admin-orange-dark) !important;
+}
+
+.fi-input-wrp {
+    border-color: var(--floure-admin-line) !important;
+    border-radius: .7rem !important;
+    background: #fffdf9 !important;
+}
+
+.fi-ta,
+.fi-fo,
+.fi-modal-window,
+.fi-dropdown-panel,
+.fi-section,
+.fi-wi-stats-overview-stat {
+    color: var(--floure-admin-text) !important;
+}
+
+.fi-tabs,
+.fi-dropdown-panel {
+    border-color: var(--floure-admin-line) !important;
+    border-radius: .75rem !important;
+}
+
+canvas {
+    max-width: 100%;
+}
+
+html.dark .fi-body {
+    background:
+        linear-gradient(90deg, rgba(217, 133, 19, .92) 0, rgba(217, 133, 19, .92) 17.5rem, transparent 17.5rem),
+        var(--floure-admin-dark) !important;
+}
+
+html.dark .fi-main-ctn {
+    background:
+        radial-gradient(circle at 20% 0, rgba(217, 133, 19, .14), transparent 28rem),
+        linear-gradient(180deg, var(--floure-admin-dark-soft), var(--floure-admin-dark)) !important;
+}
+
+html.dark .fi-header-heading {
+    color: #fff8ed !important;
+}
+
+html.dark .fi-breadcrumbs,
+html.dark .fi-breadcrumbs-item,
+html.dark .fi-breadcrumbs-item a,
+html.dark .fi-header-subheading,
+html.dark .fi-header-description {
+    color: rgba(255, 248, 237, .72) !important;
+}
+
+html.dark .fi-simple-layout,
+html.dark .fi-simple-main-ctn {
+    background: var(--floure-admin-dark) !important;
+}
+
+html.dark .fi-simple-main {
+    background: var(--floure-admin-dark-soft) !important;
+    border-color: rgba(255, 255, 255, .08) !important;
+    box-shadow: 0 22px 46px rgba(0, 0, 0, .4) !important;
+}
+
+html.dark .fi-simple-header-heading,
+html.dark .fi-simple-header .fi-logo,
+html.dark .fi-simple-page-content {
+    color: #fff8ed !important;
+}
+
+html.dark .fi-input-wrp {
+    background: var(--floure-admin-dark) !important;
+    border-color: rgba(255, 255, 255, .1) !important;
+}
+
+html.dark .fi-ta,
+html.dark .fi-fo,
+html.dark .fi-modal-window,
+html.dark .fi-dropdown-panel,
+html.dark .fi-section,
+html.dark .fi-wi-stats-overview-stat {
+    color: rgba(255, 255, 255, .8) !important;
+}
+
+@media (max-width: 1023px) {
+    .fi-body {
+        background: #fff8ed !important;
+    }
+
+    .fi-main {
+        padding: 1rem !important;
+    }
+
+    html.dark .fi-body {
+        background: var(--floure-admin-dark) !important;
+    }
+}

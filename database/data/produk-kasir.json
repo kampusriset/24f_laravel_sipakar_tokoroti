@@ -1,0 +1,20 @@
+{
+  "kategori": [
+    { "id_kategori": 1, "nama_kategori": "Roti Tawar", "deskripsi_kategori": "Roti lembut untuk sarapan." },
+    { "id_kategori": 2, "nama_kategori": "Roti Manis", "deskripsi_kategori": "Roti dengan isian manis atau gurih." },
+    { "id_kategori": 3, "nama_kategori": "Pastry", "deskripsi_kategori": "Produk pastry segar." },
+    { "id_kategori": 4, "nama_kategori": "Kue Basah", "deskripsi_kategori": "Kue tradisional dan bolu." }
+  ],
+  "produk": [
+    { "id_produk": 1, "nama_produk": "Roti Tawar Putih", "id_kategori": 1, "harga_jual": 18000, "deskripsi": "Roti tawar putih lembut 500 gram.", "tingkat_manis": 2, "alergi": "Gluten", "keperluan": "Sarapan", "stok": 50 },
+    { "id_produk": 2, "nama_produk": "Roti Tawar Gandum", "id_kategori": 1, "harga_jual": 22000, "deskripsi": "Roti gandum utuh untuk sarapan.", "tingkat_manis": 2, "alergi": "Gluten", "keperluan": "Sarapan", "stok": 30 },
+    { "id_produk": 3, "nama_produk": "Roti Coklat", "id_kategori": 2, "harga_jual": 8000, "deskripsi": "Roti lembut dengan isian coklat.", "tingkat_manis": 8, "alergi": "Gluten", "keperluan": "Cemilan", "stok": 100 },
+    { "id_produk": 4, "nama_produk": "Roti Keju", "id_kategori": 2, "harga_jual": 8500, "deskripsi": "Roti isi keju cheddar.", "tingkat_manis": 4, "alergi": "Susu", "keperluan": "Cemilan", "stok": 80 },
+    { "id_produk": 5, "nama_produk": "Donat Coklat", "id_kategori": 2, "harga_jual": 7000, "deskripsi": "Donat klasik dengan topping coklat.", "tingkat_manis": 8, "alergi": "Telur", "keperluan": "Cemilan", "stok": 60 },
+    { "id_produk": 6, "nama_produk": "Croissant Butter", "id_kategori": 3, "harga_jual": 12000, "deskripsi": "Croissant renyah dengan aroma mentega.", "tingkat_manis": 3, "alergi": "Susu", "keperluan": "Sarapan", "stok": 40 },
+    { "id_produk": 7, "nama_produk": "Pain au Chocolat", "id_kategori": 3, "harga_jual": 15000, "deskripsi": "Pastry berlapis dengan coklat batang.", "tingkat_manis": 7, "alergi": "Susu", "keperluan": "Cemilan", "stok": 35 },
+    { "id_produk": 8, "nama_produk": "Brownies Kukus", "id_kategori": 4, "harga_jual": 35000, "deskripsi": "Brownies kukus coklat yang lembut.", "tingkat_manis": 8, "alergi": "Telur", "keperluan": "Oleh-oleh", "stok": 20 },
+    { "id_produk": 9, "nama_produk": "Bolu Pandan", "id_kategori": 4, "harga_jual": 30000, "deskripsi": "Bolu pandan harum untuk keluarga.", "tingkat_manis": 7, "alergi": "Telur", "keperluan": "Acara", "stok": 15 },
+    { "id_produk": 10, "nama_produk": "Lapis Legit", "id_kategori": 4, "harga_jual": 45000, "deskripsi": "Lapis legit premium dengan rempah pilihan.", "tingkat_manis": 7, "alergi": "Telur", "keperluan": "Hadiah", "stok": 10 }
+  ]
+}

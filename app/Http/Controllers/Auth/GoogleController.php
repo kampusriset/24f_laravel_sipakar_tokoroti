@@ -32,9 +32,11 @@ class GoogleController extends Controller
 
             Auth::login($user);
 
-            return redirect()->intended('/admin');
+            return $user->isAdmin()
+                ? redirect('/admin')
+                : redirect()->route('dashboard');
         } catch (\Exception $e) {
-            return redirect('/admin/login')->with('error', 'Google login failed.');
+            return redirect()->route('login')->with('error', 'Google login failed.');
         }
     }
 }
