@@ -2,38 +2,29 @@
 
 @section('content')
 <main>
-    <section class="hero">
-        <div class="container hero-grid">
+    <section class="page-head">
+        <div class="container">
+            <span class="eyebrow">Menu pilihan</span>
+            <h1>Roti untuk setiap suasana</h1>
+            <p>Temukan rasa klasik dan kreasi baru yang dibuat hangat setiap hari.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container two-col">
             <div>
-                <span class="eyebrow">Dibuat hangat setiap pagi</span>
-                <h1>Roti lembut dan pastry segar untuk hari yang lebih manis.</h1>
-                <p class="lead">
-                    Floure Bakery menghadirkan roti, cake, dan pastry dengan bahan pilihan,
-                    dipanggang harian, dan siap menemani sarapan, hadiah, atau momen keluarga.
+                <span class="eyebrow">Fresh from oven</span>
+                <h2>Menu dibuat dengan bahan pilihan dan dipanggang harian.</h2>
+                <p class="copy">
+                    Pilih roti, pastry, atau cake favoritmu. Setiap produk bisa dibuka untuk melihat detail,
+                    harga, dan langsung dimasukkan ke keranjang.
                 </p>
-
-                <div class="hero-actions">
-                    <a class="btn btn-primary" href="{{ route('storefront.products') }}">Lihat Menu</a>
-                    <a class="btn btn-light" href="{{ route('storefront.contact') }}">Hubungi Kami</a>
-                </div>
-
-                <div class="hero-note" aria-label="Keunggulan Floure Bakery">
-                    <span>Fresh setiap hari</span>
-                    <span>Bahan berkualitas</span>
-                    <span>Pesanan acara</span>
-                </div>
             </div>
-
-            <div class="hero-media">
-                <img
-                    src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1200&q=85"
-                    alt="Aneka roti artisan yang baru dipanggang"
-                >
-                <div class="floating-panel">
-                    <b>Favorit hari ini</b>
-                    <p>Croissant butter, roti susu, dan cake lembut siap dipesan dari pagi.</p>
-                </div>
-            </div>
+            <img
+                class="page-visual"
+                src="https://images.unsplash.com/photo-1519682577862-22b62b24e493?auto=format&fit=crop&w=1100&q=85"
+                alt="Etalase bakery dengan berbagai roti dan pastry"
+            >
         </div>
     </section>
 
@@ -50,7 +41,7 @@
                 </p>
             </div>
 
-            <div class="products" id="featured-products">
+            <div class="products">
                 @php $products = config('storefront_products'); @endphp
 
                 @foreach ($products as $product)
@@ -88,27 +79,6 @@
                     Keranjang
                     <span class="cart-count" id="cart-count">0</span>
                 </button>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
-        <div class="container two-col">
-            <img
-                class="feature-img"
-                src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?auto=format&fit=crop&w=1000&q=85"
-                alt="Baker menyiapkan adonan di dapur bakery"
-            >
-            <div>
-                <span class="eyebrow">Floure Bakery</span>
-                <h2>Rasa rumahan dengan tampilan yang cantik.</h2>
-                <p class="copy">
-                    Kami menjaga proses dari pemilihan bahan, fermentasi, sampai pemanggangan
-                    agar setiap produk terasa konsisten dan tetap fresh saat sampai ke pelanggan.
-                </p>
-                <p style="margin-top: 26px;">
-                    <a class="btn btn-light" href="{{ route('storefront.about') }}">Cerita Kami</a>
-                </p>
             </div>
         </div>
     </section>
@@ -301,9 +271,7 @@
             if (!cart[id]) return;
 
             cart[id].qty += change;
-            if (cart[id].qty <= 0) {
-                delete cart[id];
-            }
+            if (cart[id].qty <= 0) delete cart[id];
 
             writeCart(cart);
             renderCart();
@@ -359,7 +327,7 @@
         };
 
         const renderCheckoutReview = () => {
-            const { cart, subtotal, service, total } = cartTotals();
+            const { cart, service, total } = cartTotals();
 
             checkoutReview.innerHTML = [
                 ...cart.map((item) => `
@@ -375,35 +343,23 @@
 
         const renderOrderSuccess = (order) => {
             orderSuccessContent.innerHTML = `
-                <div class="checkout-review-total">
-                    <span>No. Pesanan</span>
-                    <span>${escapeHtml(order.id)}</span>
-                </div>
-                <div class="checkout-review-item">
-                    <span>Nama</span>
-                    <b>${escapeHtml(order.customer.name)}</b>
-                </div>
-                <div class="checkout-review-item">
-                    <span>Metode</span>
-                    <b>${escapeHtml(order.customer.method)}</b>
-                </div>
-                <div class="checkout-review-item">
-                    <span>Jam</span>
-                    <b>${escapeHtml(order.customer.time)}</b>
-                </div>
-                <div class="checkout-review-total">
-                    <span>Total</span>
-                    <span>${formatPrice(order.total)}</span>
-                </div>
-                <p class="copy" style="margin: 8px 0 0;">
-                    Pesanan disimpan di browser ini. Admin toko bisa memproses pesanan ini dari nomor pesanan yang ditampilkan.
-                </p>
+                <div class="checkout-review-total"><span>No. Pesanan</span><span>${escapeHtml(order.id)}</span></div>
+                <div class="checkout-review-item"><span>Nama</span><b>${escapeHtml(order.customer.name)}</b></div>
+                <div class="checkout-review-item"><span>Metode</span><b>${escapeHtml(order.customer.method)}</b></div>
+                <div class="checkout-review-item"><span>Jam</span><b>${escapeHtml(order.customer.time)}</b></div>
+                <div class="checkout-review-total"><span>Total</span><span>${formatPrice(order.total)}</span></div>
+                <p class="copy" style="margin: 8px 0 0;">Pesanan disimpan di browser ini. Admin toko bisa memproses pesanan ini dari nomor pesanan yang ditampilkan.</p>
             `;
         };
 
         const openModal = (modal) => {
             modal.classList.add('is-open');
             modal.setAttribute('aria-hidden', 'false');
+        };
+
+        const closeModal = (modal) => {
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
         };
 
         const openProductModal = (product) => {
@@ -419,19 +375,9 @@
             openModal(productModal);
         };
 
-        const closeModal = (modal) => {
-            modal.classList.remove('is-open');
-            modal.setAttribute('aria-hidden', 'true');
-        };
-
         products.forEach((card) => {
-            card.querySelector('[data-action="detail"]').addEventListener('click', () => {
-                openProductModal(productFromCard(card));
-            });
-
-            card.querySelector('[data-action="add"]').addEventListener('click', () => {
-                addToCart(productFromCard(card));
-            });
+            card.querySelector('[data-action="detail"]').addEventListener('click', () => openProductModal(productFromCard(card)));
+            card.querySelector('[data-action="add"]').addEventListener('click', () => addToCart(productFromCard(card)));
         });
 
         modalAddCart.addEventListener('click', () => {

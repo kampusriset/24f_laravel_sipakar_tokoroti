@@ -2,8 +2,8 @@
     <div class="auth-brand">
         <div class="auth-mark">F</div>
         <div>
-            <h1 class="auth-title">Flourie <span>Bakery</span></h1>
-            <p class="auth-subtitle">Selamat datang kembali di dashboard toko.</p>
+            <h1 class="auth-title">Floure <span>Bakery</span></h1>
+            <p class="auth-subtitle">Akses khusus Kasir dan Admin toko.</p>
         </div>
     </div>
 
@@ -47,10 +47,10 @@
             @endif
         </div>
 
-        <button type="submit" class="auth-button">Masuk</button>
+        <button type="submit" class="auth-button">Masuk sebagai Kasir/Admin</button>
     </form>
 
-    <p class="auth-note">Hubungi administrator jika Anda belum memiliki akun.</p>
+    <p class="auth-note">Halaman ini hanya untuk Kasir dan Admin. Pelanggan dapat memesan melalui halaman produk tanpa login.</p>
 
     <div class="auth-divider">atau</div>
 

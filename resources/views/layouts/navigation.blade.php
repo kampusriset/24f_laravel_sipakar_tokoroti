@@ -536,12 +536,6 @@
         </nav>
     </div>
 
-    <div class="sidebar-card">
-        <p class="sidebar-card-title">Mode Breeze</p>
-        <p class="sidebar-card-copy">Semua menu kasir ini memakai halaman Breeze, bukan Filament.</p>
-        <a href="{{ route('kasir.transaksi.create') }}" class="sidebar-button">Mulai Transaksi</a>
-    </div>
-
     <div class="sidebar-footer">
         <div class="sidebar-user">
             <span class="sidebar-avatar">{{ strtoupper(substr(Auth::user()->name ?? 'K', 0, 1)) }}</span>

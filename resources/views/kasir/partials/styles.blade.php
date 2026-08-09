@@ -59,12 +59,136 @@
         box-shadow: 0 14px 28px rgba(82, 42, 18, .18);
     }
 
+    .kasir-action.light {
+        border: 1px solid #ead8c4;
+        background: #fffdf9;
+        color: #633116;
+        box-shadow: none;
+    }
+
+    .kasir-alert {
+        margin-bottom: 1rem;
+        padding: .85rem 1rem;
+        border: 1px solid rgba(22, 101, 52, .18);
+        border-radius: 1rem;
+        background: #ecfdf3;
+        color: #166534;
+        font-weight: 850;
+    }
+
     .kasir-card {
         overflow: hidden;
         border: 1px solid rgba(133, 91, 58, .16);
         border-radius: 1rem;
         background: rgba(255, 255, 255, .88);
         box-shadow: 0 18px 45px rgba(91, 54, 28, .1);
+    }
+
+    .kasir-form {
+        display: grid;
+        gap: 1rem;
+        padding: 1rem;
+    }
+
+    .kasir-form-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: .85rem;
+    }
+
+    .kasir-field {
+        display: grid;
+        gap: .4rem;
+    }
+
+    .kasir-field.span-2 {
+        grid-column: span 2;
+    }
+
+    .kasir-field.full {
+        grid-column: 1 / -1;
+    }
+
+    .kasir-field label {
+        color: #5f4b3d;
+        font-size: .72rem;
+        font-weight: 950;
+        text-transform: uppercase;
+    }
+
+    .kasir-input,
+    .kasir-select,
+    .kasir-textarea {
+        width: 100%;
+        min-height: 2.65rem;
+        padding: .65rem .75rem;
+        border: 1px solid #ead8c4;
+        border-radius: .85rem;
+        background: #fffdf9;
+        color: #2f2117;
+        font: inherit;
+        font-size: .88rem;
+        font-weight: 750;
+        outline: none;
+    }
+
+    .kasir-textarea {
+        min-height: 5.5rem;
+        resize: vertical;
+    }
+
+    .kasir-input:focus,
+    .kasir-select:focus,
+    .kasir-textarea:focus {
+        border-color: #d8b996;
+        box-shadow: 0 0 0 3px rgba(232, 154, 76, .16);
+    }
+
+    .kasir-form-actions,
+    .kasir-row-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .55rem;
+        align-items: center;
+    }
+
+    .kasir-row-actions {
+        justify-content: flex-end;
+    }
+
+    .kasir-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.45rem;
+        padding: .6rem .85rem;
+        border: 0;
+        border-radius: .75rem;
+        background: linear-gradient(135deg, #6a3517, #3f210f);
+        color: #fff8ed;
+        cursor: pointer;
+        font: inherit;
+        font-size: .8rem;
+        font-weight: 950;
+        text-decoration: none;
+    }
+
+    .kasir-button.secondary {
+        border: 1px solid #ead8c4;
+        background: #fffdf9;
+        color: #633116;
+    }
+
+    .kasir-button.danger {
+        border: 1px solid #f3c6d0;
+        background: #fff1f2;
+        color: #be123c;
+    }
+
+    .kasir-inline-form {
+        margin-top: .85rem;
+        padding-top: .85rem;
+        border-top: 1px solid rgba(133, 91, 58, .12);
     }
 
     .kasir-card-head {
@@ -222,6 +346,10 @@
             grid-template-columns: repeat(2, minmax(0, 1fr));
         }
 
+        .kasir-form-grid {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
         .pos-layout {
             grid-template-columns: 1fr;
         }
@@ -238,6 +366,14 @@
 
         .kasir-grid {
             grid-template-columns: 1fr;
+        }
+
+        .kasir-form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .kasir-field.span-2 {
+            grid-column: auto;
         }
 
         .kasir-table {

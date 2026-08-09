@@ -16,8 +16,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('storefront.home');
+})->name('home');
+
+Route::view('/menu', 'storefront.products')->name('storefront.products');
+Route::view('/tentang', 'storefront.about')->name('storefront.about');
+Route::view('/kontak', 'storefront.contact')->name('storefront.contact');
 
 Route::get('/dashboard', function () {
     try {
@@ -128,27 +132,122 @@ Route::middleware(['auth'])->prefix('kasir')->name('kasir.')->group(function () 
             $products = Produk::with(['kategori', 'stok'])
                 ->latest('id_produk')
                 ->paginate(12);
+            $categories = KategoriProduk::orderBy('nama_kategori')->get();
         } catch (Throwable) {
             $products = collect();
+            $categories = collect();
         }
 
-        return view('kasir.produk-index', compact('products'));
+        return view('kasir.produk-index', compact('products', 'categories'));
     })->name('produk.index');
+
+    Route::post('/produk', function (Request $request) {
+        $validated = $request->validate([
+            'nama_produk' => ['required', 'string', 'max:150'],
+            'id_kategori' => ['required', 'exists:kategori_produk,id_kategori'],
+            'harga_jual' => ['required', 'numeric', 'min:0'],
+            'tingkat_manis' => ['required', 'integer', 'min:1', 'max:10'],
+            'alergi' => ['required', 'in:Tidak Ada,Gluten,Susu,Kacang,Telur'],
+            'keperluan' => ['required', 'in:Sarapan,Cemilan,Oleh-oleh,Hadiah,Acara'],
+            'deskripsi' => ['nullable', 'string', 'max:500'],
+            'gambar' => ['nullable', 'string', 'max:255'],
+            'jumlah_stok' => ['nullable', 'integer', 'min:0'],
+        ]);
+
+        $stock = $validated['jumlah_stok'] ?? 0;
+        unset($validated['jumlah_stok']);
+
+        DB::transaction(function () use ($validated, $stock) {
+            $product = Produk::create($validated);
+            StokProduk::create([
+                'id_produk' => $product->id_produk,
+                'jumlah_stok' => $stock,
+                'tanggal_update' => now(),
+            ]);
+        });
+
+        return redirect()->route('kasir.produk.index')->with('status', 'Produk berhasil ditambahkan.');
+    })->name('produk.store');
+
+    Route::patch('/produk/{produk}', function (Request $request, Produk $produk) {
+        $validated = $request->validate([
+            'nama_produk' => ['required', 'string', 'max:150'],
+            'id_kategori' => ['required', 'exists:kategori_produk,id_kategori'],
+            'harga_jual' => ['required', 'numeric', 'min:0'],
+            'tingkat_manis' => ['required', 'integer', 'min:1', 'max:10'],
+            'alergi' => ['required', 'in:Tidak Ada,Gluten,Susu,Kacang,Telur'],
+            'keperluan' => ['required', 'in:Sarapan,Cemilan,Oleh-oleh,Hadiah,Acara'],
+            'deskripsi' => ['nullable', 'string', 'max:500'],
+            'gambar' => ['nullable', 'string', 'max:255'],
+        ]);
+
+        $produk->update($validated);
+
+        return redirect()->route('kasir.produk.index')->with('status', 'Produk berhasil diperbarui.');
+    })->name('produk.update');
+
+    Route::delete('/produk/{produk}', function (Produk $produk) {
+        DB::transaction(function () use ($produk) {
+            $produk->stok()->delete();
+            $produk->delete();
+        });
+
+        return redirect()->route('kasir.produk.index')->with('status', 'Produk berhasil dihapus.');
+    })->name('produk.destroy');
 
     Route::get('/stok', function () {
         try {
             $stocks = StokProduk::with('produk')
                 ->orderBy('jumlah_stok')
                 ->paginate(10);
+            $products = Produk::orderBy('nama_produk')->get();
         } catch (Throwable) {
             $stocks = collect();
+            $products = collect();
         }
 
-        return view('kasir.stok-index', compact('stocks'));
+        return view('kasir.stok-index', compact('stocks', 'products'));
     })->name('stok.index');
+
+    Route::post('/stok', function (Request $request) {
+        $validated = $request->validate([
+            'id_produk' => ['required', 'exists:produk,id_produk'],
+            'jumlah_stok' => ['required', 'integer', 'min:0'],
+        ]);
+
+        StokProduk::updateOrCreate(
+            ['id_produk' => $validated['id_produk']],
+            [
+                'jumlah_stok' => $validated['jumlah_stok'],
+                'tanggal_update' => now(),
+            ]
+        );
+
+        return redirect()->route('kasir.stok.index')->with('status', 'Stok berhasil disimpan.');
+    })->name('stok.store');
+
+    Route::patch('/stok/{stokProduk}', function (Request $request, StokProduk $stokProduk) {
+        $validated = $request->validate([
+            'jumlah_stok' => ['required', 'integer', 'min:0'],
+        ]);
+
+        $stokProduk->update([
+            'jumlah_stok' => $validated['jumlah_stok'],
+            'tanggal_update' => now(),
+        ]);
+
+        return redirect()->route('kasir.stok.index')->with('status', 'Stok berhasil diperbarui.');
+    })->name('stok.update');
+
+    Route::delete('/stok/{stokProduk}', function (StokProduk $stokProduk) {
+        $stokProduk->delete();
+
+        return redirect()->route('kasir.stok.index')->with('status', 'Stok berhasil dihapus.');
+    })->name('stok.destroy');
 
     Route::match(['get', 'post'], '/ai-rekomendasi', function (Request $request) {
         $hasil = [];
+        $catalog = collect(config('storefront_products'));
         $data = [
             'budget' => $request->input('budget'),
             'tingkat_manis' => $request->input('tingkat_manis'),
@@ -175,13 +274,19 @@ Route::middleware(['auth'])->prefix('kasir')->name('kasir.')->group(function () 
 
             foreach ($ranking as $item) {
                 $produk = Produk::where('nama_produk', $item['produk'])->first();
+                $catalogItem = $catalog->firstWhere('name', $item['produk']);
+                $image = $produk?->gambar;
+
+                if ($image && ! str_starts_with($image, 'http')) {
+                    $image = 'storage/' . ltrim($image, '/');
+                }
 
                 $hasil[] = [
                     'produk' => $item['produk'],
                     'nilai' => $item['nilai'],
-                    'harga' => $produk?->harga_jual,
-                    'gambar' => $produk?->gambar,
-                    'deskripsi' => $produk?->deskripsi,
+                    'harga' => $produk?->harga_jual ?? $catalogItem['price'] ?? null,
+                    'gambar' => $image ?: ($catalogItem['image'] ?? null),
+                    'deskripsi' => $produk?->deskripsi ?: ($catalogItem['description'] ?? null),
                     'bobot' => $item['bobot'] ?? null,
                 ];
             }
@@ -189,7 +294,7 @@ Route::middleware(['auth'])->prefix('kasir')->name('kasir.')->group(function () 
             $data = $validated;
         }
 
-        return view('kasir.ai-rekomendasi', compact('hasil', 'data'));
+        return view('kasir.ai-rekomendasi', compact('hasil', 'data', 'catalog'));
     })->name('ai-rekomendasi');
 });
 

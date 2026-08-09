@@ -1,127 +1,76 @@
-@php
-    $topMax = max(1, (int) ($topProducts->max('total_terjual') ?? 1));
-    $categoryTotal = max(1, (int) $categories->sum('produk_count'));
-    $chartColors = ['#f59e0b', '#3b82f6', '#22c55e', '#ef4444', '#8b5cf6', '#ec4899', '#06b6d4'];
-    $trendPoints = $monthlySales->values()->map(function ($value, $index) use ($monthlyMax) {
-        $x = 36 + ($index * 76);
-        $y = 220 - (((float) $value / $monthlyMax) * 170);
-        return $x . ',' . $y;
-    })->implode(' ');
-@endphp
-
 <x-app-layout>
     <style>
         .dashboard-page {
             min-height: calc(100vh - 4.75rem);
-            padding: 1.75rem;
-            background:
-                radial-gradient(circle at 8% 8%, rgba(230, 148, 69, .14), transparent 20rem),
-                linear-gradient(135deg, #fffaf3 0%, #f8efe4 52%, #f6eadc 100%);
-            color: #2f2117;
+            padding: 1.5rem 1.75rem;
+            background: #ffffff;
+            color: #111827;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         .dashboard-wrap {
-            width: min(100%, 1380px);
-            margin: 0 auto;
-        }
-
-        .dashboard-head {
-            margin-bottom: 1.25rem;
-        }
-
-        .dashboard-kicker {
-            margin: 0 0 .35rem;
-            color: #9a6b45;
-            font-size: .78rem;
-            font-weight: 950;
-            letter-spacing: .06em;
-            text-transform: uppercase;
+            max-width: 1180px;
+            margin: 0;
         }
 
         .dashboard-title {
-            margin: 0;
-            color: #2f2117;
-            font-size: clamp(1.9rem, 3vw, 2.8rem);
-            font-weight: 950;
-            line-height: 1;
-        }
-
-        .dashboard-subtitle {
-            margin: .45rem 0 0;
-            color: #806d5f;
-            font-weight: 650;
+            margin: 0 0 1.35rem;
+            color: #000;
+            font-size: 1.35rem;
+            font-weight: 800;
+            line-height: 1.2;
         }
 
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
-            gap: 1rem;
-            margin-bottom: 1rem;
+            gap: 1.25rem;
+            margin-bottom: 1.25rem;
         }
 
         .stat-card,
         .widget-card {
-            border: 1px solid rgba(133, 91, 58, .16);
-            border-radius: 1rem;
-            background: rgba(255, 255, 255, .9);
-            box-shadow: 0 18px 45px rgba(91, 54, 28, .1);
             overflow: hidden;
+            border: 1px solid #d9d9d9;
+            border-radius: .7rem;
+            background: #fff;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
         }
 
         .stat-card {
-            position: relative;
-            min-height: 8.75rem;
-            padding: 1.15rem;
-        }
-
-        .stat-card::after {
-            content: "";
-            position: absolute;
-            inset-inline: 1rem;
-            bottom: 0;
-            height: .22rem;
-            border-radius: 999px 999px 0 0;
-            background: linear-gradient(90deg, #d9843a, #663214);
+            min-height: 8.25rem;
+            padding: 1.15rem 1.35rem;
         }
 
         .stat-label {
-            display: flex;
-            align-items: center;
-            gap: .5rem;
-            margin: 0;
-            color: #79685c;
-            font-size: .82rem;
-            font-weight: 850;
-        }
-
-        .stat-icon {
-            display: grid;
-            width: 2rem;
-            height: 2rem;
-            place-items: center;
-            border-radius: .7rem;
-            background: #fff1d7;
+            margin: 0 0 .45rem;
+            color: #5f6470;
+            font-size: .72rem;
+            font-weight: 600;
         }
 
         .stat-value {
-            margin: .75rem 0 .25rem;
-            color: #1f150f;
-            font-size: clamp(1.65rem, 2.4vw, 2.25rem);
-            font-weight: 950;
-            line-height: 1;
+            margin: 0;
+            color: #000;
+            font-size: 1.55rem;
+            font-weight: 800;
+            line-height: 1.15;
         }
 
         .stat-help {
-            margin: 0;
-            color: #8b7868;
-            font-size: .82rem;
+            margin: .45rem 0 0;
+            font-size: .7rem;
             font-weight: 650;
         }
+
+        .help-green { color: #00b050; }
+        .help-orange { color: #f59e0b; }
+        .help-red { color: #ef4444; }
 
         .widget-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 1rem;
+            gap: 1.25rem;
         }
 
         .widget-card.full {
@@ -129,160 +78,130 @@
         }
 
         .widget-head {
-            padding: 1rem 1.15rem;
-            border-bottom: 1px solid rgba(133, 91, 58, .12);
-            background: linear-gradient(180deg, #fffdf9, #fff8ed);
+            padding: .9rem 1.25rem;
+            border-bottom: 1px solid #d9d9d9;
+            background: #fff;
         }
 
         .widget-title {
             margin: 0;
-            color: #2f2117;
-            font-size: 1rem;
-            font-weight: 950;
+            color: #000;
+            font-size: .98rem;
+            font-weight: 800;
         }
 
         .widget-desc {
-            margin: .25rem 0 0;
-            color: #806d5f;
-            font-size: .84rem;
-            font-weight: 650;
+            margin: .22rem 0 0;
+            color: #667085;
+            font-size: .7rem;
+            font-weight: 500;
         }
 
-        .widget-body {
-            padding: 1rem 1.15rem 1.25rem;
+        .chart-area {
+            position: relative;
+            height: 23rem;
+            padding: 1rem 1.4rem 1.25rem;
+            background: #fff;
+        }
+
+        .chart-area.large {
+            height: 25rem;
+        }
+
+        .chart-grid {
+            position: absolute;
+            inset: 2.1rem 1.8rem 2.1rem 1.8rem;
+            background-image:
+                linear-gradient(to right, rgba(17, 24, 39, .06) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(17, 24, 39, .06) 1px, transparent 1px);
+            background-size: 10% 20%;
+        }
+
+        .axis-x {
+            position: absolute;
+            right: 1.8rem;
+            bottom: .9rem;
+            left: 1.8rem;
+            display: grid;
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+            color: #697386;
+            font-size: .62rem;
+            text-align: center;
+        }
+
+        .axis-y {
+            position: absolute;
+            top: 1.5rem;
+            bottom: 2.1rem;
+            left: 1.05rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: #697386;
+            font-size: .62rem;
+        }
+
+        .trend-line {
+            position: absolute;
+            right: 2.3rem;
+            bottom: 2.65rem;
+            left: 2.3rem;
+            height: .36rem;
+            border-radius: 999px;
+            background: #f59e0b;
+        }
+
+        .trend-dot {
+            position: absolute;
+            bottom: -.28rem;
+            width: .72rem;
+            height: .72rem;
+            border-radius: 999px;
+            background: #78350f;
+            transform: translateX(-50%);
         }
 
         .bar-list {
+            position: relative;
+            z-index: 1;
             display: grid;
-            gap: .95rem;
+            gap: .7rem;
+            padding: .75rem .25rem;
         }
 
         .bar-row {
             display: grid;
-            gap: .45rem;
-        }
-
-        .bar-head {
-            display: flex;
-            justify-content: space-between;
-            gap: 1rem;
-            color: #2f2117;
-            font-size: .88rem;
-            font-weight: 900;
+            grid-template-columns: 11rem 1fr 4rem;
+            align-items: center;
+            gap: .75rem;
+            color: #111827;
+            font-size: .75rem;
+            font-weight: 700;
         }
 
         .bar-track {
-            height: .72rem;
+            height: .6rem;
             overflow: hidden;
             border-radius: 999px;
-            background: #f1e2d1;
+            background: #f2f4f7;
         }
 
         .bar-fill {
             display: block;
             height: 100%;
             border-radius: inherit;
-            background: linear-gradient(90deg, #f59e0b, #633116);
+            background: #f59e0b;
         }
 
-        .monthly-chart {
+        .empty-note {
+            position: relative;
+            z-index: 1;
             display: grid;
-            grid-template-columns: repeat(12, minmax(0, 1fr));
-            gap: .55rem;
-            align-items: end;
-            min-height: 18rem;
-            padding-top: 1rem;
-        }
-
-        .month-bar {
-            display: grid;
-            gap: .45rem;
-            align-items: end;
             height: 100%;
-            min-width: 0;
-        }
-
-        .month-fill {
-            min-height: .35rem;
-            border-radius: .65rem .65rem .2rem .2rem;
-            background: linear-gradient(180deg, #f59e0b, #9a4f1f);
-            box-shadow: inset 0 1px 0 rgba(255,255,255,.45);
-        }
-
-        .month-label {
-            color: #806d5f;
-            font-size: .72rem;
-            font-weight: 850;
-            text-align: center;
-        }
-
-        .category-layout {
-            display: grid;
-            grid-template-columns: minmax(180px, .65fr) minmax(0, 1fr);
-            gap: 1.25rem;
-            align-items: center;
-        }
-
-        .donut {
-            --p1: 0%;
-            width: min(100%, 15rem);
-            aspect-ratio: 1;
-            margin: 0 auto;
-            border-radius: 999px;
-            background: conic-gradient(#f59e0b var(--p1), #3b82f6 0 100%);
-            display: grid;
             place-items: center;
-        }
-
-        .donut::after {
-            content: "";
-            width: 58%;
-            aspect-ratio: 1;
-            border-radius: inherit;
-            background: #fffdf9;
-            box-shadow: inset 0 0 0 1px rgba(133, 91, 58, .12);
-        }
-
-        .legend {
-            display: grid;
-            gap: .7rem;
-        }
-
-        .legend-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            color: #2f2117;
-            font-size: .86rem;
-            font-weight: 850;
-        }
-
-        .legend-name {
-            display: inline-flex;
-            align-items: center;
-            gap: .55rem;
-            min-width: 0;
-        }
-
-        .dot {
-            width: .72rem;
-            height: .72rem;
-            flex: 0 0 auto;
-            border-radius: 999px;
-        }
-
-        .trend-svg {
-            width: 100%;
-            min-height: 19rem;
-            overflow: visible;
-        }
-
-        .empty-state {
-            padding: 3rem 1rem;
-            color: #8b7868;
-            text-align: center;
-            font-weight: 800;
+            color: #8a6b4d;
+            font-size: 1rem;
+            font-weight: 700;
         }
 
         @media (max-width: 1180px) {
@@ -298,46 +217,43 @@
             }
 
             .stats-grid,
-            .widget-grid,
-            .category-layout {
+            .widget-grid {
                 grid-template-columns: 1fr;
             }
 
-            .monthly-chart {
-                overflow-x: auto;
-                grid-template-columns: repeat(12, 3rem);
+            .bar-row {
+                grid-template-columns: 1fr;
             }
         }
     </style>
 
     <div class="dashboard-page">
         <div class="dashboard-wrap">
-            <header class="dashboard-head">
-                <p class="dashboard-kicker">Dashboard Floure Bakery</p>
-                <h1 class="dashboard-title">Ringkasan Operasional</h1>
-                <p class="dashboard-subtitle">Isi dashboard mengikuti widget Filament: statistik, top produk, kategori, penjualan, dan tren pendapatan.</p>
-            </header>
+            <h1 class="dashboard-title">Dashboard Floure Bakery</h1>
 
             <section class="stats-grid">
                 <article class="stat-card">
-                    <p class="stat-label"><span class="stat-icon">📦</span>Total Produk</p>
+                    <p class="stat-label">📦 Total Produk</p>
                     <h2 class="stat-value">{{ number_format($stats['total_produk']) }} Produk</h2>
-                    <p class="stat-help">Jumlah seluruh produk yang tersedia</p>
+                    <p class="stat-help help-green">Jumlah seluruh produk yang tersedia 🟢</p>
                 </article>
+
                 <article class="stat-card">
-                    <p class="stat-label"><span class="stat-icon">🛒</span>Total Transaksi</p>
+                    <p class="stat-label">🛒 Total Transaksi</p>
                     <h2 class="stat-value">{{ number_format($stats['total_transaksi']) }} Transaksi</h2>
-                    <p class="stat-help">Transaksi yang telah tercatat</p>
+                    <p class="stat-help help-orange">Transaksi yang telah tercatat 🛒</p>
                 </article>
+
                 <article class="stat-card">
-                    <p class="stat-label"><span class="stat-icon">💰</span>Total Pendapatan</p>
+                    <p class="stat-label">💰 Total Pendapatan</p>
                     <h2 class="stat-value">Rp {{ number_format($stats['total_pendapatan'], 0, ',', '.') }}</h2>
-                    <p class="stat-help">Akumulasi pendapatan toko</p>
+                    <p class="stat-help help-orange">Akumulasi pendapatan toko 💵</p>
                 </article>
+
                 <article class="stat-card">
-                    <p class="stat-label"><span class="stat-icon">⚠</span>Stok Menipis</p>
+                    <p class="stat-label">⚠️ Stok Menipis</p>
                     <h2 class="stat-value">{{ number_format($stats['stok_menipis']) }} Produk</h2>
-                    <p class="stat-help">Produk dengan stok ≤ 10</p>
+                    <p class="stat-help help-red">Produk dengan stok ≤ 10 ⚠️</p>
                 </article>
             </section>
 
@@ -347,23 +263,26 @@
                         <h2 class="widget-title">🏆 Top 5 Produk Terlaris</h2>
                         <p class="widget-desc">Produk yang paling banyak terjual berdasarkan jumlah transaksi.</p>
                     </div>
-                    <div class="widget-body">
+                    <div class="chart-area large">
+                        <div class="chart-grid"></div>
                         @if($topProducts->isNotEmpty())
+                            @php $topMax = max(1, (int) ($topProducts->max('total_terjual') ?? 1)); @endphp
                             <div class="bar-list">
                                 @foreach($topProducts as $item)
                                     @php $percent = min(100, ((int) $item->total_terjual / $topMax) * 100); @endphp
                                     <div class="bar-row">
-                                        <div class="bar-head">
-                                            <span>{{ $item->produk?->nama_produk ?? 'Produk dihapus' }}</span>
-                                            <strong>{{ number_format($item->total_terjual) }} terjual</strong>
-                                        </div>
-                                        <div class="bar-track"><span class="bar-fill" style="width: {{ $percent }}%"></span></div>
+                                        <span>{{ $item->produk?->nama_produk ?? 'Produk dihapus' }}</span>
+                                        <span class="bar-track"><span class="bar-fill" style="width: {{ $percent }}%"></span></span>
+                                        <strong>{{ number_format($item->total_terjual) }}</strong>
                                     </div>
                                 @endforeach
                             </div>
-                        @else
-                            <div class="empty-state">Belum ada data produk terlaris.</div>
                         @endif
+                        <div class="axis-x">
+                            @foreach(['0','0.1','0.2','0.3','0.4','0.5','0.6','0.7','0.8','0.9','1.0',''] as $tick)
+                                <span>{{ $tick }}</span>
+                            @endforeach
+                        </div>
                     </div>
                 </article>
 
@@ -372,28 +291,10 @@
                         <h2 class="widget-title">🥧 Distribusi Produk Berdasarkan Kategori</h2>
                         <p class="widget-desc">Persentase jumlah produk pada setiap kategori.</p>
                     </div>
-                    <div class="widget-body">
-                        @if($categories->isNotEmpty())
-                            @php
-                                $firstPercent = (($categories->first()->produk_count ?? 0) / $categoryTotal) * 100;
-                            @endphp
-                            <div class="category-layout">
-                                <div class="donut" style="--p1: {{ $firstPercent }}%;"></div>
-                                <div class="legend">
-                                    @foreach($categories as $index => $category)
-                                        @php
-                                            $percent = ($category->produk_count / $categoryTotal) * 100;
-                                            $color = $chartColors[$index % count($chartColors)];
-                                        @endphp
-                                        <div class="legend-item">
-                                            <span class="legend-name"><span class="dot" style="background: {{ $color }}"></span>{{ $category->nama_kategori }}</span>
-                                            <strong>{{ $category->produk_count }} produk · {{ number_format($percent, 1) }}%</strong>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-                        @else
-                            <div class="empty-state">Belum ada kategori produk.</div>
+                    <div class="chart-area large">
+                        <div class="chart-grid"></div>
+                        @if($categories->isEmpty())
+                            <div class="empty-note">Belum ada kategori produk.</div>
                         @endif
                     </div>
                 </article>
@@ -403,17 +304,16 @@
                         <h2 class="widget-title">📈 Grafik Penjualan Bulanan</h2>
                         <p class="widget-desc">Total pendapatan toko setiap bulan.</p>
                     </div>
-                    <div class="widget-body">
-                        <div class="monthly-chart">
-                            @foreach($months as $index => $month)
-                                @php
-                                    $value = (float) $monthlySales[$index];
-                                    $height = max(2, ($value / $monthlyMax) * 100);
-                                @endphp
-                                <div class="month-bar">
-                                    <div class="month-fill" title="Rp {{ number_format($value, 0, ',', '.') }}" style="height: {{ $height }}%"></div>
-                                    <span class="month-label">{{ $month }}</span>
-                                </div>
+                    <div class="chart-area">
+                        <div class="chart-grid"></div>
+                        <div class="axis-y">
+                            @foreach(['1.0','0.9','0.8','0.7','0.6','0.5','0.4','0.3','0.2','0.1','0'] as $tick)
+                                <span>{{ $tick }}</span>
+                            @endforeach
+                        </div>
+                        <div class="axis-x">
+                            @foreach($months as $month)
+                                <span>{{ $month }}</span>
                             @endforeach
                         </div>
                     </div>
@@ -424,24 +324,23 @@
                         <h2 class="widget-title">📈 Tren Pendapatan Bulanan</h2>
                         <p class="widget-desc">Pergerakan pendapatan toko setiap bulan.</p>
                     </div>
-                    <div class="widget-body">
-                        <svg class="trend-svg" viewBox="0 0 900 260" preserveAspectRatio="none" role="img" aria-label="Tren pendapatan bulanan">
-                            <defs>
-                                <linearGradient id="trendFill" x1="0" x2="0" y1="0" y2="1">
-                                    <stop offset="0%" stop-color="#f59e0b" stop-opacity=".28" />
-                                    <stop offset="100%" stop-color="#f59e0b" stop-opacity="0" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M36,220 L{{ $trendPoints }} L872,220 Z" fill="url(#trendFill)" />
-                            <polyline points="{{ $trendPoints }}" fill="none" stroke="#f59e0b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" />
-                            @foreach($monthlySales as $index => $value)
-                                @php
-                                    $x = 36 + ($index * 76);
-                                    $y = 220 - (((float) $value / $monthlyMax) * 170);
-                                @endphp
-                                <circle cx="{{ $x }}" cy="{{ $y }}" r="6" fill="#633116" />
+                    <div class="chart-area">
+                        <div class="chart-grid"></div>
+                        <div class="axis-y">
+                            @foreach(['1.0','0.9','0.8','0.7','0.6','0.5','0.4','0.3','0.2','0.1','0'] as $tick)
+                                <span>{{ $tick }}</span>
                             @endforeach
-                        </svg>
+                        </div>
+                        <div class="trend-line">
+                            @foreach($months as $index => $month)
+                                <span class="trend-dot" style="left: {{ $index * (100 / 11) }}%;"></span>
+                            @endforeach
+                        </div>
+                        <div class="axis-x">
+                            @foreach($months as $month)
+                                <span>{{ $month }}</span>
+                            @endforeach
+                        </div>
                     </div>
                 </article>
             </section>
