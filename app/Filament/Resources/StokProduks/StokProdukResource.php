@@ -19,9 +19,13 @@ class StokProdukResource extends Resource
 {
     protected static ?string $model = StokProduk::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedArchiveBox;
 
     protected static ?string $navigationLabel = 'Stok Produk';
+
+    protected static ?string $modelLabel = 'Stok Produk';
+
+    protected static ?string $pluralModelLabel = 'Stok Produk';
 
     public static function form(Schema $schema): Schema
     {

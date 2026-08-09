@@ -22,24 +22,44 @@ class DashboardStats extends StatsOverviewWidget
 
         return [
 
-            Stat::make('📦 Total Produk', $totalProduk . ' Produk')
+            Stat::make('Total Produk', $totalProduk . ' Produk')
                 ->description('Jumlah seluruh produk yang tersedia')
-                ->color('success'),
+                ->descriptionIcon('heroicon-m-cube')
+                ->icon('heroicon-o-shopping-bag')
+                ->color('success')
+                ->extraAttributes([
+                    'class' => 'stat-value-success'
+                ]),
 
-            Stat::make('🛒 Total Transaksi', $totalTransaksi . ' Transaksi')
+            Stat::make('Total Transaksi', $totalTransaksi . ' Transaksi')
                 ->description('Transaksi yang telah tercatat')
-                ->color('primary'),
+                ->descriptionIcon('heroicon-m-shopping-cart')
+                ->icon('heroicon-o-shopping-cart')
+                ->color('primary')
+                ->extraAttributes([
+                    'class' => 'stat-value-primary'
+                ]),
 
             Stat::make(
-                '💰 Total Pendapatan',
+                'Total Pendapatan',
                 'Rp ' . number_format($totalPendapatan, 0, ',', '.')
             )
                 ->description('Akumulasi pendapatan toko')
-                ->color('warning'),
+                ->descriptionIcon('heroicon-m-banknotes')
+                ->icon('heroicon-o-banknotes')
+                ->color('warning')
+                ->extraAttributes([
+                    'class' => 'stat-value-warning'
+                ]),
 
-            Stat::make('⚠️ Stok Menipis', $stokMenipis . ' Produk')
+            Stat::make('Stok Menipis', $stokMenipis . ' Produk')
                 ->description('Produk dengan stok ≤ 10')
-                ->color('danger'),
+                ->descriptionIcon('heroicon-m-exclamation-triangle')
+                ->icon('heroicon-o-exclamation-triangle')
+                ->color('danger')
+                ->extraAttributes([
+                    'class' => 'stat-value-danger'
+                ]),
 
         ];
     }

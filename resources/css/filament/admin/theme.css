@@ -298,3 +298,42 @@ html.dark .fi-wi-stats-overview-stat {
         background: var(--floure-admin-dark) !important;
     }
 }
+
+/* Styling untuk semua card widget */
+.fi-wi-chart {
+    background: linear-gradient(135deg, #FFFBF2 0%, #F5EDE0 100%) !important;
+    border: 1px solid #A9754F !important;
+    border-radius: 12px !important;
+    box-shadow: 0 4px 6px rgba(107, 66, 38, 0.08) !important;
+    transition: all 0.3s ease !important;
+}
+
+.fi-wi-chart:hover {
+    box-shadow: 0 8px 16px rgba(107, 66, 38, 0.15) !important;
+    transform: translateY(-2px) !important;
+}
+
+/* Heading card */
+.fi-wi-chart .fi-section-header {
+    border-bottom: 2px solid #F59E0B !important;
+    padding-bottom: 12px !important;
+    margin-bottom: 16px !important;
+}
+
+.fi-wi-chart .fi-section-header h3 {
+    color: #6B4226 !important;
+    font-weight: 700 !important;
+    font-size: 1.1rem !important;
+}
+
+/* Description card */
+.fi-wi-chart .fi-section-header .fi-section-header-description {
+    color: #A9754F !important;
+    font-size: 0.875rem !important;
+}
+
+/* Card content area */
+.fi-wi-chart .fi-section-content {
+    padding: 16px 8px !important;
+}
+
