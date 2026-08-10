@@ -316,6 +316,7 @@ Kemudian sistem akan membandingkan kebutuhan tersebut dengan karakteristik produ
 
 ## 📁 Struktur Project
 Secara umum struktur project Laravel:
+```
 toko-roti/
 │
 ├── app/
@@ -345,6 +346,7 @@ toko-roti/
 ├── composer.json
 ├── package.json
 └── README.md
+```
 
 ---
 
