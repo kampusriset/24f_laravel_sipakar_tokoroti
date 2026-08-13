@@ -34,7 +34,7 @@ Dengan adanya sistem ini, proses pengelolaan toko roti diharapkan menjadi lebih 
 ---
 
 ## ✨ Fitur Aplikasi
-
+```
 🔐 Autentikasi dan Pengguna
 1. Login pengguna
 2. Logout
@@ -114,6 +114,7 @@ Dengan adanya sistem ini, proses pengelolaan toko roti diharapkan menjadi lebih 
 58. Menampilkan informasi produk
 59. Menampilkan informasi stok
 60. Menampilkan informasi transaksi
+```
 
 ---
 
