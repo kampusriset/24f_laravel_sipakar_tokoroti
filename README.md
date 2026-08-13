@@ -1,3 +1,14 @@
+## 👥 Nama Kelompok, Anggota kelompok, & Job
+
+```
+- Nama Kelompok                 (MBG LUCU)
+- Andreas Hannik Junianto       (2413010662) (database engineer, backend developer, documentation)
+- Ryan Kurnia C                 (2413010667) (frontend)
+- Nabila Putri A                (2413010687) (frontend)
+- Zukhruf Friday S              (2413010664) (frontend)
+```
+
+---
 # 🍞 Sistem Informasi Manajemen Toko Roti
 
 Sistem Informasi Manajemen Toko Roti berbasis web yang dibangun menggunakan Laravel dan MySQL. Aplikasi ini dirancang untuk membantu proses pengelolaan produk, stok, bahan baku, pegawai, transaksi penjualan, pembayaran, serta menyediakan fitur berbasis Artificial Intelligence (AI) untuk membantu memberikan informasi dan rekomendasi terkait produk.
@@ -356,13 +367,3 @@ Project ini dikembangkan sebagai bagian dari tugas/proyek akademik dengan studi 
 Fokus utama sistem meliputi manajemen produk, stok, bahan baku, pegawai, transaksi, pembayaran, autentikasi pengguna, serta penerapan Artificial Intelligence untuk rekomendasi produk.
 
 ---
-
-## 👥 Nama Kelompok, Anggota kelompok, & Job
-
-```
-- Nama Kelompok                 (MBG LUCU)
-- Andreas Hannik Junianto       (2413010662) (database engineer, backend developer, documentation)
-- Ryan Kurnia C                 (2413010667) (frontend)
-- Nabila Putri A                (2413010687) (frontend)
-- Zukhruf Friday S              (2413010664) (frontend)
-```
