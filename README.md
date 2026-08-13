@@ -357,12 +357,12 @@ Fokus utama sistem meliputi manajemen produk, stok, bahan baku, pegawai, transak
 
 ---
 
-## 👥 Nama Kelompok, Anggota kelompok, & job
+## 👥 Nama Kelompok, Anggota kelompok, & Job
 
 ```
-- **Nama Kelompok**                 (MBG LUCU)
-- **Andreas Hannik Junianto**       (2413010662) (database engineer, backend developer, documentation)
-- **Ryan Kurnia C**                 (2413010667) (frontend)
-- **Nabila Putri A**                (2413010687) (frontend)
-- **Zukhruf Friday S**              (2413010664) (frontend)
+- Nama Kelompok                 (MBG LUCU)
+- Andreas Hannik Junianto       (2413010662) (database engineer, backend developer, documentation)
+- Ryan Kurnia C                 (2413010667) (frontend)
+- Nabila Putri A                (2413010687) (frontend)
+- Zukhruf Friday S              (2413010664) (frontend)
 ```
