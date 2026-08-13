@@ -4,7 +4,6 @@ namespace App\Filament\Resources\Transaksis\Schemas;
 
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
 class TransaksiForm
@@ -25,14 +24,6 @@ class TransaksiForm
                     ->searchable()
                     ->preload()
                     ->required(),
-
-                TextInput::make('total_bayar')
-                    ->label('Total Bayar')
-                    ->numeric()
-                    ->prefix('Rp')
-                    ->required()
-                    ->minValue(0)
-                    ->default(0),
 
                 Select::make('status_transaksi')
                     ->label('Status Transaksi')

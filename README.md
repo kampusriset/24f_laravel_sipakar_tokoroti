@@ -307,7 +307,7 @@ Kemudian sistem akan membandingkan kebutuhan tersebut dengan karakteristik produ
 - **Frontend**: Blade, HTML, CSS, JavaScript
 - **Styling**: Tailwind CSS / komponen frontend yang digunakan dalam project
 - **Package Management**: Composer & NPM
-- **Authentication**: Laravel Authentication
+- **Authentication**: Laravel Authentication & Google Authentication
 - **AI**: Artificial Intelligence untuk rekomendasi produk
 - **Web Server**: Laragon
 - **Version Control**: Git & GitHub
@@ -357,10 +357,12 @@ Fokus utama sistem meliputi manajemen produk, stok, bahan baku, pegawai, transak
 
 ---
 
-## 👥 Nama Kelompok & Anggota kelompok
+## 👥 Nama Kelompok, Anggota kelompok, & job
 
-- **Nama Kelompok**                 MBG LUCU
-- **Andreas Hannik Junianto**       (2413010662)
-- **Ryan Kurnia C**                 (2413010667)
-- **Nabila Putri A**                (2413010687)
-- **Zukhruf Friday S**              (2413010664)
+```
+- **Nama Kelompok**                 (MBG LUCU)
+- **Andreas Hannik Junianto**       (2413010662) (database engineer, backend developer, documentation)
+- **Ryan Kurnia C**                 (2413010667) (frontend)
+- **Nabila Putri A**                (2413010687) (frontend)
+- **Zukhruf Friday S**              (2413010664) (frontend)
+```
